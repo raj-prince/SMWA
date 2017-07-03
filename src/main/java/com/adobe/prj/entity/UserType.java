@@ -1,0 +1,5 @@
+package com.adobe.prj.entity;
+
+public enum UserType {
+	SURVEYOR, RESPONDAR, BOTH
+}
