@@ -1,5 +1,9 @@
 package com.adobe.prj.dao;
 
-public interface SurveyDao {
+import java.util.List;
 
+import com.adobe.prj.entity.Question;
+
+public interface SurveyDao {
+	public List<Question> getQuestions();
 }

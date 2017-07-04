@@ -1,5 +1,7 @@
 package com.adobe.prj.dao;
 
-public interface QuestionDao {
+import java.util.List;
 
+public interface QuestionDao {
+	
 }
