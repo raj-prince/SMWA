@@ -23,7 +23,22 @@ public class Question {
 	@ManyToOne
 	@JoinColumn(name="survey_id")
 	private Survey surveyId;
-
+	
+	@Column(name="qtext")
+	private String qText;
+	
+	@Column(name="opA")
+	private String opA;
+	
+	@Column(name="opB")
+	private String opB;
+	
+	@Column(name="opC")
+	private String opC;
+	
+	@Column(name="opD")
+	private String opD;
+	
 	/**
 	 * 
 	 */
