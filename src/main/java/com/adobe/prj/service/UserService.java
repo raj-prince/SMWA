@@ -1,12 +1,10 @@
-package com.adobe.prj.dao;
+package com.adobe.prj.service;
 
 import java.util.List;
 
 import com.adobe.prj.entity.User;
 
-public interface UserDao {
+public interface UserService {
 	List<User> getUsers();
 	int addUser(User user);
-	User getUser(int userId);
-	void updateUser(User user);
 }
