@@ -13,19 +13,20 @@ import com.adobe.prj.entity.User;
 
 @Repository
 public class UserDaoJpaImpl implements UserDao {
+	
 	@PersistenceContext
 	private EntityManager em;
+
+	@Override
+	public int addUser(User user) {
+		em.persist(user);
+		return user.getUserId();
+	}
 	
 	@Override
 	public List<User> getUsers() {
 		TypedQuery<User> query = em.createQuery("from User", User.class);
 		return query.getResultList();
-	}
-	
-	@Override
-	public int addUser(User user) {
-		em.persist(user);
-		return user.getUserId();
 	}
 	
 	@Override

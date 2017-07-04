@@ -31,6 +31,24 @@ public class User {
 	@Column(name="user_type")
 	private UserType userType;
 
+	@Column(name="enabled")
+	private boolean enabled;
+	
+	public User(int userId, String firstName, String lastName, String userName, String password, UserType userType
+			) {
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.password = password;
+		this.userType = userType;
+		this.enabled = true;
+	}
+	public User(){
+		this.enabled=true;
+		
+	}
+
 	/**
 	 * @return the userId
 	 */
