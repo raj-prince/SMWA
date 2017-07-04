@@ -25,7 +25,7 @@ public class AppConfig {
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/ADOBE_JUN_DB");
         ds.setUsername("root");
-        ds.setPassword("prince");        
+        ds.setPassword("password");        
         return ds;
 	}
 	

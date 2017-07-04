@@ -1,5 +1,7 @@
 package com.adobe.prj.dao;
 
-public interface UserDao {
+import com.adobe.prj.entity.User;
 
+public interface UserDao {
+	int addUser(User user);
 }
