@@ -1,6 +1,10 @@
 package com.adobe.prj.web;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adobe.prj.entity.User;
 import com.adobe.prj.service.UserService;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 @Controller
 public class UserController {
@@ -36,7 +41,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String home() {
+	public String home( Authentication authentication) {
+//			Collections<Integer> user_type=authentication.getAuthorities();
+			
 			return "home";
 	}
 }
