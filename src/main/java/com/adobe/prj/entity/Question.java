@@ -57,6 +57,10 @@ public class Question {
 		this.opD = opD;
 	}
 
+	public Question(Survey surveyId) {
+		this.surveyId = surveyId;
+	}
+
 	public int getQuestionId() {
 		return questionId;
 	}

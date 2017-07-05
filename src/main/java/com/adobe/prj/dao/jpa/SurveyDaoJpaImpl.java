@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.adobe.prj.dao.SurveyDao;
 import com.adobe.prj.entity.Customer;
 import com.adobe.prj.entity.Question;
+import com.adobe.prj.entity.Survey;
 
 @Repository
 public class SurveyDaoJpaImpl implements SurveyDao {
@@ -18,8 +19,17 @@ public class SurveyDaoJpaImpl implements SurveyDao {
 	private EntityManager em;
 
 	@Override
-	public List<Question> getQuestions() {
-		TypedQuery<Question> query = em.createQuery("select c from Question c", Question.class);
+	public List<Question> getQuestions(int id) {
+		TypedQuery<Question> query = em.createQuery("select q from Question ques where ques.surveyId=."+id, Question.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public int addSurvey(Survey survey) {
+		em.persist(survey);
+		return survey.getSurveyId();
+		
+		// TODO Auto-generated method stub
+//		return 0;
 	}
 }
