@@ -20,7 +20,7 @@ public class Survey {
 	@Column(name="survey_title")
 	private String surveyTitle;
 	
-	@Column(name="sruvey_description")
+	@Column(name="survey_description")
 	private String surveyDescription;
 	
 	@ManyToOne

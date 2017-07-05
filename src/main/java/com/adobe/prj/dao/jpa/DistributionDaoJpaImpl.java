@@ -16,7 +16,14 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 	private EntityManager em;
 
 	@Override
-	public int distribueSurvey(Distribution distribution) {
+	public int distributeSurvey(Distribution distribution) {
+		em.persist(distribution);
+		return distribution.getDistributionId();
+	}
+
+	@Override
+	public int dis(Distribution distribution) {
+		// TODO Auto-generated method stub
 		em.persist(distribution);
 		return distribution.getDistributionId();
 	}
