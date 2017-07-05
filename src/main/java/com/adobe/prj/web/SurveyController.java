@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.adobe.prj.dao.QuestionDao;
 import com.adobe.prj.dao.SurveyDao;
+import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Movie;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.Survey;
@@ -31,18 +32,36 @@ public class SurveyController {
 	public String addSurvey(Model model, @ModelAttribute("survey") Survey s)
 	{
 		surveyDao.addSurvey(s);
-		model.addAttribute("msg", "Survey" + s.getSurveyTitle() + " added successfully!!!");
+		model.addAttribute("survey2",s);
+		model.addAttribute("msg_surveyadded", "Survey" + s.getSurveyTitle() + " added successfully!!!");
+		Question q= new Question(s);
+		model.addAttribute("question",q);
 		return "questionForm.jsp";
 	}
 	
 	@RequestMapping("addQuestion.do")
-	public String getQuestionForm(Model model)
+	public String addQuestion(Model model, @ModelAttribute("survey2") Survey sid, 
+			@ModelAttribute("question") Question q)
 	{
 //		model.addAttribute("question", new Question());
-		Question q= new Question();
+//		Question q= new Question(sid);
 		questionDao.addQuestion(q);
-		model.addAttribute("msg", "question added successfully");
+		model.addAttribute("msg_qa", "question added successfully");
+		q=new Question(sid);
+		model.addAttribute("question",q);
 		return "questionForm.jsp";
+	}
+	
+	
+	
+	@RequestMapping("distribute.do")
+	public String distributeSurvey(Model model, @ModelAttribute("survey2") Survey s)
+	{
+		Distribution d=new Distribution();
+		d.setSurveyId(s);
+		model.addAttribute("distri",d);
+		return "distributionForm.jsp";
+		
 	}
 	
 	
