@@ -5,5 +5,7 @@ import com.adobe.prj.entity.Survey;
 
 public interface DistributionDao {
 
-	public int distribueSurvey(Distribution distribution);
+	public int distributeSurvey(Distribution distribution);
+	public int dis(Distribution distribution);
+	
 }

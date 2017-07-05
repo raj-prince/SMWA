@@ -20,7 +20,7 @@ public class AppInitializer implements WebApplicationInitializer {
 				"DispatcherServlet", new DispatcherServlet(context));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("*.do");
-	}
+	}	
 
 	private WebApplicationContext getContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
