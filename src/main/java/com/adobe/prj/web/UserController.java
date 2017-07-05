@@ -34,4 +34,9 @@ public class UserController {
 			@RequestParam("password")String password, Model model) {
 			return "index.jsp";
 	}
+	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String home() {
+			return "home";
+	}
 }
