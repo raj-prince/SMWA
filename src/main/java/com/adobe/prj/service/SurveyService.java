@@ -22,4 +22,5 @@ public interface SurveyService {
 	public int addSurvey(Survey survey);
 	public int addQuestion(Question question);
 	public int distributeSurvey(Distribution distribution);
+	Survey getSurveyById(int sid);
 }

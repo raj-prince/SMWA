@@ -103,5 +103,11 @@ public class Survey {
 	public void setCreatedBy(String string) {
 		this.createdBy = string;
 	}
+
+	@Override
+	public String toString() {
+		return "Survey [surveyId=" + surveyId + ", surveyTitle=" + surveyTitle + ", surveyDescription="
+				+ surveyDescription + ", createdBy=" + createdBy + "]";
+	}
 	
 }

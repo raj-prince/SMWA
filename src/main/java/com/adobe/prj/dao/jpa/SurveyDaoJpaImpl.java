@@ -34,4 +34,10 @@ public class SurveyDaoJpaImpl implements SurveyDao {
 		// TODO Auto-generated method stub
 //		return 0;
 	}
+
+	@Override
+	@Transactional
+	public Survey getSurveyById(int surveyId){
+		return em.find(Survey.class, surveyId);
+	}
 }

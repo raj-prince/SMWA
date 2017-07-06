@@ -1,15 +1,15 @@
 package com.adobe.prj.web;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
@@ -30,27 +30,41 @@ public class SurveyController {
 	}
 	
 	@RequestMapping("addSurvey.do")
-	public String addSurvey(Model model, @ModelAttribute("survey") Survey s,Authentication authentication)
+	@Transactional
+	public String addSurvey(Model model, @ModelAttribute("survey") Survey s,Authentication authentication, HttpSession session)
 	{
-		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+		User a=(User) authentication.getPrincipal();
 		s.setCreatedBy(a.getUsername());
-		surveyService.addSurvey(s);
+//		System.out.println(s.getSurveyId()+"surveyid");
 		model.addAttribute("survey2",s);
-		model.addAttribute("msg_surveyadded", "Survey" + s.getSurveyTitle() + " added successfully!!!");
-		Question q= new Question(s);
+		surveyService.addSurvey(s);
+		
+		model.addAttribute("msg", "Survey" + s.getSurveyTitle() + " added successfully!!!");
+		Question q= new Question();
+		q.setSurveyId(s);
+		System.out.println(q.getSurveyId().getSurveyId());
 		model.addAttribute("question",q);
+		System.out.println(s);
+		session.setAttribute("surveyId", s.getSurveyId());
 		return "questionForm";
 	}
 	
 	@RequestMapping("addQuestion.do")
-	public String addQuestion(Model model, @ModelAttribute("survey2") Survey sid, 
-			@ModelAttribute("question") Question q)
-	{
-//		model.addAttribute("question", new Question());
-//		Question q= new Question(sid);
+	@Transactional
+	public String addQuestion(Model model,  
+			@ModelAttribute("question") Question q, Authentication authentication, HttpSession session)
+	{	
+		
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey sid = surveyService.getSurveyById(surveyId);
+//		Survey s=(Survey) surveyService.addQuestion(question)
+		System.out.println(sid + " addques");
+		q.setSurveyId(sid);
 		surveyService.addQuestion(q);
 		model.addAttribute("msg", "question added successfully");
 		q=new Question(sid);
+		q.setSurveyId(sid);
+		System.out.println(q.getSurveyId().getSurveyId());
 		model.addAttribute("question",q);
 		return "questionForm";
 	}

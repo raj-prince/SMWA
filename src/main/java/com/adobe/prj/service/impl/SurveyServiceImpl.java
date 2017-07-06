@@ -49,5 +49,10 @@ public class SurveyServiceImpl implements SurveyService {
 		
 		return distributionDao.distributeSurvey(distribution);
 	}
+	
+	@Override
+	public Survey getSurveyById(int sid){
+		return surveyDao.getSurveyById(sid);
+	}
 
 }
