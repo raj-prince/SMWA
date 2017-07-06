@@ -38,4 +38,11 @@ public class UserDaoJpaImpl implements UserDao {
 	public void updateUser(User user) {
 		em.merge(user);
 	}
+
+	@Override
+	public User getUserByName(String uname) {
+		TypedQuery<User> query=em.createQuery("select u from User u where u.userName="+"'"+uname+"'",User.class);
+		
+		return query.getResultList().get(0);
+	}
 }

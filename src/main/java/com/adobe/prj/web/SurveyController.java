@@ -1,5 +1,9 @@
 package com.adobe.prj.web;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.Survey;
+import com.adobe.prj.entity.SurveyStatus;
 import com.adobe.prj.service.SurveyService;
 
 @Controller
@@ -72,23 +79,54 @@ public class SurveyController {
 	
 	
 	@RequestMapping("distribute.do")
-	public String distribute(Model model, @ModelAttribute("survey2") Survey s)
+	public String distribute(Model model,HttpSession session)
 	{
-		Distribution d=new Distribution();
-		d.setSurveyId(s);
-		model.addAttribute("distri",d);
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey s = surveyService.getSurveyById(surveyId);
+		model.addAttribute("user",new com.adobe.prj.entity.User());
+		
+		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
+		List<String> userList=new ArrayList<String>();
+		userObjectList.forEach((u) -> userList.add(u.getUserName()));
+		model.addAttribute("userList", userList);
 		return "distributionForm";
 		
 	}
 	
-	@RequestMapping("addDistribution.do")
-	public String addDistribution(Model model, @ModelAttribute("distri") Distribution d)
+	@RequestMapping(value="addDistribution.do")
+	public String addDistribution(Model model, @ModelAttribute("user") com.adobe.prj.entity.User u1, HttpSession session)
 	{
-		surveyService.distributeSurvey(d);
-		model.addAttribute("msg","distributed to "+ d.getUserId().getUserName() + " succesfully" );
-		return "summaryPage";
+//		Distribution d = new Distribution();
+		System.out.println("here");
+		String uname=u1.getUserName();
+		System.out.println(uname);
+		com.adobe.prj.entity.User user= surveyService.getUserByName(uname);
+		Distribution d2=new Distribution();
+//		d.setUserId(new com.adobe.prj.entity.User());
+		System.out.println(user);
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey s = surveyService.getSurveyById(surveyId);
+//		Distribution d2=new Distribution();
+		d2.setSurveyId(s);
+		d2.setSurveyStatus(SurveyStatus.OPEN);
+		d2.setDistributionTimestamp(new Date());
+		d2.setUserId(user);
+		surveyService.distributeSurvey(d2);
+		model.addAttribute("msg","distributed to "+ d2.getUserId().getUserName() + " succesfully" );
+		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
+		List<String> userList=new ArrayList<String>();
+		userObjectList.forEach((u) -> userList.add(u.getUserName()));
+		model.addAttribute("userList", userList);
+		model.addAttribute("user",new com.adobe.prj.entity.User());
+		return "distributionForm";
 		
 	}
+	
+//	@RequestMapping()
+//	public ModelAndView getUsers()
+//	{
+//		
+//	}
 	
 //	@RequestMapping("view_qtypes.do")
 //	public ModelAndView selectTag()

@@ -11,7 +11,7 @@
 <body>
 	<h2>Question Form, For descriptive and one liners, leave the option fields blank</h2>
 	<form:form commandName="question" action="addQuestion.do">
-	<input type="hidden" name="survey2" value={survey2}>
+	
 	<table>
     <tr>
     <td>
