@@ -9,10 +9,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Movie Form</h2>
+	<h2>Question Form, For descriptive and one liners, leave the option fields blank</h2>
 	<form:form commandName="question" action="addQuestion.do">
-	question <form:input path="qText"/> <br />
+	<table>
+    <tr>
+    <td>
+        <ul>
+		<form:select path="questionType">
+                <form:option value="oc">one correct</form:option>
+                <form:option value="mc">multi correct</form:option>
+                <form:option selected="selected" value="ol">one line</form:option>
+                <form:option value="desc">descriptive</form:option>
+            </form:select>
+       </ul>
+    </td>
+    </tr>
+    <tr><td>Question Text <form:input path="qText"/></td> </tr>
+	 <tr><td>Option A <form:input path="opA"/></td> </tr>
+	<tr><td>Option B <form:input path="opB"/></td> </tr>
+	<tr><td>Option C <form:input path="opC"/></td> </tr>
+	<tr><td>Option D <form:input path="opD"/></td> </tr>
+	<tr>
+        <td>
+           <input type="submit" value=" Save and add new question"/>
+        </td>
+    </tr>
+    
+    </table>
 	</form:form>
+	
+	<form action="distribute.do">
+    <input type="submit"value="Quit and Distribute">
+	</form>
 
 </body>
 </html>
