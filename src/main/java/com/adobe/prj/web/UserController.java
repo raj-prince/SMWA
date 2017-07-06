@@ -1,11 +1,17 @@
 package com.adobe.prj.web;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+<<<<<<< HEAD
 import org.springframework.security.core.context.SecurityContextHolder;
+=======
+import org.springframework.security.core.GrantedAuthority;
+>>>>>>> c5d1fe71f65691c499b744e859ba423c02b0150f
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.adobe.prj.entity.User;
 import com.adobe.prj.entity.UserType;
 import com.adobe.prj.service.UserService;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 @Controller
 public class UserController {
@@ -44,8 +50,32 @@ public class UserController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home( Authentication authentication) {
+<<<<<<< HEAD
 //			Collections<Integer> user_type=authentication.getAuthorities();
 		
 		 return "indexRespondent";
+=======
+			Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+			Iterator<? extends GrantedAuthority> it = user_type.iterator();
+			
+			while(it.hasNext()){
+				String authority = it.next().getAuthority();
+				if(authority.equals("0")){
+					return "surveyor";
+				}
+				else if(authority.equals("1"))
+				{
+					return "respondent";
+				}
+				else
+				{
+					return "both";
+				}
+			}
+//			
+//			Object[] arr=user_type.toArray();
+//			;
+			return "home";
+>>>>>>> c5d1fe71f65691c499b744e859ba423c02b0150f
 	}
 }
