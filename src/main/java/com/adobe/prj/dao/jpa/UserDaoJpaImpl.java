@@ -29,13 +29,19 @@ public class UserDaoJpaImpl implements UserDao {
 		return query.getResultList();
 	}
 	
-	@Override
-	public User getUser(int userId) {
-		return em.find(User.class, userId);
-	}
+	
 	
 	@Override
 	public void updateUser(User user) {
 		em.merge(user);
+	}
+
+	@Override
+	public User getUser(String username) {
+		
+		TypedQuery<User> query = em.createQuery("select u from User u where u.userName=:username", User.class);
+		query.setParameter("username", username);
+		//return em.find(User.class, username);
+	   return query.getSingleResult();
 	}
 }

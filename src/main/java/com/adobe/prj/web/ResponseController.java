@@ -7,16 +7,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.adobe.prj.entity.Response;
-import com.adobe.prj.entity.Survey;
 import com.adobe.prj.service.ResponseService;
+import com.adobe.prj.service.UserService;
 
 @Controller
+@SessionAttributes("userName")
 public class ResponseController {
 	
 	@Autowired
 	ResponseService responseService;
+	
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("getSurvey.do")
 	public String fetchSurvey(Model model){ //
@@ -25,7 +30,10 @@ public class ResponseController {
 		
 		//System.out.println("Hello"+ user.getFirstName());
 		model.addAttribute("survey",responseService.getSurvey());
-		return "surveyList.jsp";
+		String s=(String )model.asMap().get("surveyDescription");
+		System.out.println(model.toString());
+		model.addAttribute("msg", "checking ");
+		return "surveyList";
 		
 		
 	}
@@ -36,7 +44,7 @@ public class ResponseController {
 		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		//System.out.println("Hello"+ user.getFirstName());
-		model.addAttribute("survey",responseService.getClosedSurvey());
+		model.addAttribute("surveys",responseService.getClosedSurvey());
 		return "SurveyList.jsp";
 		
 		

@@ -7,7 +7,8 @@
 <title>Surveys</title>
 </head>
 <body>
+<h3> Surveys</h3>
 
-
+<h2> ${msg }</h2>
 </body>
 </html>

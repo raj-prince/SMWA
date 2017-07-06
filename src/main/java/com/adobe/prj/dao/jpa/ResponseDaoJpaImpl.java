@@ -25,7 +25,9 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 	public List<Survey> getSurvey() {
 		
 		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId in (select d.surveyId from Distribution d where d.surveyStatus=1 and d.userId="+id+")", Survey.class);
-		return query.getResultList();
+		
+		TypedQuery<Survey> query1 = em.createQuery("select q from Survey q",Survey.class);
+		return query1.getResultList();
 	}
 
 	@Override
