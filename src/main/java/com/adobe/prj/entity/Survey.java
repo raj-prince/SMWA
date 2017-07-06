@@ -23,9 +23,10 @@ public class Survey {
 	@Column(name="survey_description")
 	private String surveyDescription;
 	
-	@ManyToOne
-	@JoinColumn(name="created_by")
-	private User createdBy;
+//	@ManyToOne
+//	@JoinColumn(name="created_by")
+	@Column
+	private String createdBy;
 
 	
 	/**
@@ -40,7 +41,7 @@ public class Survey {
 	 * @param surveyDescription
 	 * @param createdBy
 	 */
-	public Survey(int surveyId, String surveyTitle, String surveyDescription, User createdBy) {
+	public Survey(int surveyId, String surveyTitle, String surveyDescription, String createdBy) {
 		this.surveyId = surveyId;
 		this.surveyTitle = surveyTitle;
 		this.surveyDescription = surveyDescription;
@@ -92,15 +93,15 @@ public class Survey {
 	/**
 	 * @return the createdBy
 	 */
-	public User getCreatedBy() {
+	public String getCreatedBy() {
 		return createdBy;
 	}
 
 	/**
-	 * @param createdBy the createdBy to set
+	 * @param string the createdBy to set
 	 */
-	public void setCreatedBy(User createdBy) {
-		this.createdBy = createdBy;
+	public void setCreatedBy(String string) {
+		this.createdBy = string;
 	}
 	
 }

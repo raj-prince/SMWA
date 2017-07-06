@@ -7,6 +7,9 @@
 <title>Welcome Surveyor!!</title>
 </head>
 <body>
-
+	<h2>title</h2>
+	<div>${msg}</div>
+	<a href><a href="createSurvey.do">Create a survey</a><br />
+	<a href="distribute.do">Distribute survey</a>
 </body>
 </html>

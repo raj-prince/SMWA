@@ -11,9 +11,7 @@
 <body>
 	<h2>Movie Form</h2>
 	<form:form commandName="question" action="addQuestion.do">
-	Name of Movie <form:input path="name"/> <br />
-	Year of Release <form:input path="year"/> <br />
-	<button type="submit"> Add Movies</button>
+	question <form:input path="qText"/> <br />
 	</form:form>
 
 </body>

@@ -1,7 +1,11 @@
 package com.adobe.prj.web;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adobe.prj.entity.User;
 import com.adobe.prj.service.UserService;
+
 
 @Controller
 public class UserController {
@@ -38,7 +43,27 @@ public class UserController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home( Authentication authentication) {
-		//Collections<Integer> user_type=authentication.getAuthorities();
-		return "home";
+
+			Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+			Iterator<? extends GrantedAuthority> it = user_type.iterator();
+			
+			while(it.hasNext()){
+				String authority = it.next().getAuthority();
+				if(authority.equals("0")){
+					return "surveyor";
+				}
+				else if(authority.equals("1"))
+				{
+					return "respondent";
+				}
+				else
+				{
+					return "both";
+				}
+			}
+//			
+//			Object[] arr=user_type.toArray();
+//			;
+			return "home";
 	}
 }
