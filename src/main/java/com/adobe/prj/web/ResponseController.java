@@ -19,27 +19,23 @@ public class ResponseController {
 	ResponseService responseService;
 	
 	@RequestMapping("getSurvey.do")
-	public String fetchSurvey(Model model){ //
+	public String fetchSurvey(Model model){
 		
 		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		//System.out.println("Hello"+ user.getFirstName());
 		model.addAttribute("survey",responseService.getSurvey());
 		return "surveyList.jsp";
-		
-		
 	}
 	
 	@RequestMapping("getClosedSurvey.do")
-	public String fetchClosedSurvey(Model model){ //
+	public String fetchClosedSurvey(Model model){
 		
 		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		//System.out.println("Hello"+ user.getFirstName());
 		model.addAttribute("survey",responseService.getClosedSurvey());
 		return "SurveyList.jsp";
-		
-		
 	}
 	
 	/*@RequestMapping("newResponse.do")
@@ -66,7 +62,7 @@ public class ResponseController {
 		model.addAttribute("question",responseService.getQuestion(surveyId));
 		
 		return "closedSurvey.jsp";
-}
+	}
 	
 	@RequestMapping(value = "/getOneOpenSurvey/{id}", method = RequestMethod.GET)
     public String getOpenSurveyById(@PathVariable Integer id, Model model) {
@@ -80,9 +76,5 @@ public class ResponseController {
 		//model.addAttribute(arg0, arg1)
 		
 		return "openSurvey.jsp";
-}
-	
-	
-	
-
+	}
 }

@@ -11,9 +11,9 @@
 <body>
 	<h2>title</h2>
 	<div>${msg}</div>
-	<a href><a href="getSurvey.do">Get surveys for you !</a><br />
-	<a href><a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
-	<a href><a href="newResponse.do">Give Response For This Survey !</a><br />
+	<a href="getSurvey.do">Get surveys for you !</a><br />
+	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
+	<a href="newResponse.do">Give Response For This Survey !</a><br />
 	
 	
 </body>
