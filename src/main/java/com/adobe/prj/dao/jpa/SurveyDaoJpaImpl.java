@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adobe.prj.dao.SurveyDao;
 import com.adobe.prj.entity.Customer;
@@ -25,6 +26,7 @@ public class SurveyDaoJpaImpl implements SurveyDao {
 	}
 
 	@Override
+	@Transactional
 	public int addSurvey(Survey survey) {
 		em.persist(survey);
 		return survey.getSurveyId();

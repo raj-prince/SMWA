@@ -13,7 +13,6 @@
 	<form:form commandName="survey" action="addSurvey.do">
 	Title of Survey <form:input path="surveyTitle"/> <br />
 	Description of Survey <form:input path="surveyDescription"/> <br />
-	Created By <form:input path="createdBy"/> <br />
 	
 	<button type="submit"> Create Survey</button>
 	</form:form>
