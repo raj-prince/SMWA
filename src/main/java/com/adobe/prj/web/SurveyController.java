@@ -1,11 +1,15 @@
 package com.adobe.prj.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
@@ -71,6 +75,20 @@ public class SurveyController {
 		return "summaryPage";
 		
 	}
+	
+//	@RequestMapping("view_qtypes.do")
+//	public ModelAndView selectTag()
+//	{
+//		ModelAndView mav = new ModelAndView();
+//		Map<String, String> qTypes=new HashMap<String,String>();
+//		qTypes.put("OneCorrect", "oc");
+//		qTypes.put("multiCorrect", "mc");
+//		qTypes.put("oneline", "ol");
+//		qTypes.put("desc", "desc");
+//		mav.addObject("qTypes",qTypes);
+//		mav.addObject("ques",new Question());
+//		return mav;
+//	}
 	
 	
 }
