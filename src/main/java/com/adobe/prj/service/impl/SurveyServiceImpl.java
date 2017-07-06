@@ -1,5 +1,6 @@
 package com.adobe.prj.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.adobe.prj.dao.DistributionDao;
 import com.adobe.prj.dao.QuestionDao;
+import com.adobe.prj.dao.ResponseDao;
 import com.adobe.prj.dao.SurveyDao;
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
@@ -24,7 +26,10 @@ public class SurveyServiceImpl implements SurveyService {
 	private QuestionDao questionDao;
 	
 	@Autowired
-	private DistributionDao distributionDao; 
+	private DistributionDao distributionDao;
+	
+	@Autowired
+	private ResponseDao responseDao;
 	
 	@Override
 	public List<Question> getQuestions(int id) {
@@ -49,5 +54,49 @@ public class SurveyServiceImpl implements SurveyService {
 		
 		return distributionDao.distributeSurvey(distribution);
 	}
-
+	
+	@Override
+	public List<Distribution> getDistributedSurveys() {
+		return distributionDao.getDistributedSurveys();
+	}
+	
+	// return list of all survey created by the given user.
+	public List<Survey> getAllSurvey(String createdBy) {
+		return surveyDao.getAllSurvey(createdBy);
+	}
+	
+	@Override
+	public int cntClosedStatus(int surveyId) {
+		return distributionDao.cntClosedStatus(surveyId);
+	}
+			
+	@Override
+	public int cntOpenStatus(int surveyId) {
+		return distributionDao.cntClosedStatus(surveyId);
+	}
+	
+	@Override
+	public Date getTimeStamp(int surveyId) {
+		return distributionDao.getTimeStamp(surveyId);
+	}
+	
+	@Override
+	public List<Question> getQuestionsForReview(int surveyId) {
+		return questionDao.getQuestions(surveyId);
+	}
+	
+	@Override
+	public int countResponse(int questionId, String res) {
+		return responseDao.count(questionId, res);
+	}
+	
+	@Override
+	public Survey getSurvey(int surveyId) {
+		return surveyDao.getSurvey(surveyId);
+	}
+	
+	@Override
+	public List<String> getResponseForId(int questionId) {
+		return responseDao.getResponse(questionId);
+	}
 }

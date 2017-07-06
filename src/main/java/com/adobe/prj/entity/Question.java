@@ -18,7 +18,7 @@ public class Question {
 	private int questionId;
 	
 	@Column(name="question_type")
-	private String questionType;
+	private QuestionType questionType;
 	
 	@ManyToOne
 	@JoinColumn(name="survey_id")
@@ -45,7 +45,7 @@ public class Question {
 	public Question() {
 	}
 
-	public Question(int questionId, String questionType, Survey surveyId, String qText, String opA, String opB,
+	public Question(int questionId, QuestionType questionType, Survey surveyId, String qText, String opA, String opB,
 			String opC, String opD) {
 		this.questionId = questionId;
 		this.questionType = questionType;
@@ -69,11 +69,11 @@ public class Question {
 		this.questionId = questionId;
 	}
 
-	public String getQuestionType() {
+	public QuestionType getQuestionType() {
 		return questionType;
 	}
 
-	public void setQuestionType(String questionType) {
+	public void setQuestionType(QuestionType questionType) {
 		this.questionType = questionType;
 	}
 

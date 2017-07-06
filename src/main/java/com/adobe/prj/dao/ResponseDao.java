@@ -13,6 +13,13 @@ public interface ResponseDao {
 	 Survey getSurveyById(int id);
 	 Survey getClosedSurvey();
 	 List<Question>getQuestion(int id);
+	 
+	 // it returns that how many user responds ans for the given question id.
+	 int count(int questionId, String ans);
+	 
+	 // it return responses of the given question id.
+	 List<String> getResponse(int questionId);
+
 	
 
 }
