@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.adobe.prj.dao.DistributionDao;
 import com.adobe.prj.entity.Distribution;
-import com.adobe.prj.entity.Survey;
 
 @Repository
 public class DistributionDaoJpaImpl implements DistributionDao {
