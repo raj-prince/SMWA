@@ -113,7 +113,7 @@ public class SurveyController {
 		model.addAttribute("msg","distributed to "+ d2.getUserId().getUserName() + " succesfully" );
 		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
 		List<String> userList=new ArrayList<String>();
-		userObjectList.forEach((u) -> s.add(u.getUserName()));
+		userObjectList.forEach((u) -> userList.add(u.getUserName()));
 		model.addAttribute("userList", userList);
 		model.addAttribute("user",new com.adobe.prj.entity.User());
 		return "distributionForm";
@@ -132,14 +132,14 @@ public class SurveyController {
 				(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		String currentUserName = currentUser.getUsername();
 		List<Survey> allCreatedSurvey = surveyService.getAllSurvey(currentUserName);
-		List<Integer> totalCntList = new ArrayList<Integer>();
-		List<Integer> responseCntList = new ArrayList<Integer>();
+		List<Long> totalCntList = new ArrayList<Long>();
+		List<Long> responseCntList = new ArrayList<Long>();
 		List<Date> distributionDate = new ArrayList<Date>();
 		List<Integer> surveyIdList = new ArrayList<Integer>();
 		List<String> surveyTitleList = new ArrayList<String>();
 		for (Survey s : allCreatedSurvey) {
-			int open = surveyService.cntOpenStatus(s.getSurveyId());
-			int closed = surveyService.cntClosedStatus(s.getSurveyId());
+			long open = surveyService.cntOpenStatus(s.getSurveyId());
+			long closed = surveyService.cntClosedStatus(s.getSurveyId());
 			surveyIdList.add(s.getSurveyId());
 			totalCntList.add(open + closed);
 			responseCntList.add(open);
@@ -163,7 +163,7 @@ public class SurveyController {
 	@RequestMapping("reviewResponseForQuestion.do")
 	public String reviewResponseForQuestion(@RequestParam("surveyId") String surveyIdStr, Model model) {
 		int surveyId = Integer.parseInt(surveyIdStr);
-		Survey surveyor = surveyService.getSurvey(surveyId);
+		Survey survey = surveyService.getSurvey(surveyId);
 		List<Question> listOfQuestion = surveyService.getQuestions(surveyId);
 		List<Question> mcqQuestion = new ArrayList<Question>();
 		List<Integer> cntForA = new ArrayList<Integer>();
@@ -188,7 +188,7 @@ public class SurveyController {
 				descAnswer.add(surveyService.getResponseForId(q.getQuestionId()));
 			}
 		}
-		model.addAttribute("surveyor", surveyor);
+		model.addAttribute("survey", survey);
 		model.addAttribute("mcqQuestion", mcqQuestion);
 		model.addAttribute("cntForA", cntForA);
 		model.addAttribute("cntForB", cntForB);

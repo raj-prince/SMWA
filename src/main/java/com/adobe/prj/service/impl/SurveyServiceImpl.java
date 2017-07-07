@@ -70,12 +70,12 @@ public class SurveyServiceImpl implements SurveyService {
 	}
 	
 	@Override
-	public int cntClosedStatus(int surveyId) {
+	public long cntClosedStatus(int surveyId) {
 		return distributionDao.cntClosedStatus(surveyId);
 	}
 			
 	@Override
-	public int cntOpenStatus(int surveyId) {
+	public long cntOpenStatus(int surveyId) {
 		return distributionDao.cntClosedStatus(surveyId);
 	}
 	

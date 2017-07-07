@@ -15,8 +15,8 @@
 	<h3>Review Response For Survey</h3>
 	
 		<%
-		List<Integer> ltotal = (List<Integer>)request.getAttribute("totalCntList");
-		List<Integer> lresponse = (List<Integer>)request.getAttribute("responseCntList");
+		List<Long> ltotal = (List<Long>)request.getAttribute("totalCntList");
+		List<Long> lresponse = (List<Long>)request.getAttribute("responseCntList");
 		List<Date> ldistribution = (List<Date>)request.getAttribute("distributionList");
 		List<Integer> lsurveyId = (List<Integer>)request.getAttribute("surveyIdList");
 		List<String> lsurveyTitle = (List<String>)request.getAttribute("surveyTitleList");
