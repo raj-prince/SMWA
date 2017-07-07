@@ -14,7 +14,7 @@
 	<h5>Hello  ${userName} </h5>
 	<a href="getSurvey.do">Get surveys for you !</a><br />
 	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
-	<a href="newResponse.do">Give Response For This Survey !</a><br />
+	
 	
 	
 </body>

@@ -20,8 +20,8 @@ public class ResponseServiceImpl implements ResponseService{
 	ResponseDao responseDao;
 	
 	@Override
-	public List<Survey> getSurvey() {
-		return responseDao.getSurvey();
+	public List<Survey> getSurvey(String username) {
+		return responseDao.getSurvey(username);
 	}
 
 	@Override
@@ -35,14 +35,27 @@ public class ResponseServiceImpl implements ResponseService{
 	}
 
 	@Override
-	public Survey getClosedSurvey() {
-		return responseDao.getClosedSurvey();
+	public List<Survey> getClosedSurvey(String username) {
+		return responseDao.getClosedSurvey(username);
 		
 	}
 
 	@Override
 	public List<Question> getQuestion(int id) {
 		return responseDao.getQuestion(id);
+	}
+
+	
+
+	@Override
+	public Response getResponse(int qid, String username) {
+	return responseDao.getResponse(qid,username);
+	}
+
+	@Override
+	public void updateDistributionTable(int sid, String uname) {
+		responseDao.updateDistributionTable(sid, uname);
+		
 	}
 
 }

@@ -17,6 +17,12 @@ public class Survey {
 	@Column(name="survey_id")
 	private int surveyId;
 	
+	@Override
+	public String toString() {
+		return "Survey [surveyId=" + surveyId + ", surveyTitle=" + surveyTitle + ", surveyDescription="
+				+ surveyDescription + ", createdBy=" + createdBy + "]";
+	}
+
 	@Column(name="survey_title")
 	private String surveyTitle;
 	

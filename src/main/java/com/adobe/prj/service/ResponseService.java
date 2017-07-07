@@ -8,10 +8,12 @@ import com.adobe.prj.entity.Survey;
 
 public interface ResponseService {
 
-	List<Survey> getSurvey();
+	List<Survey> getSurvey(String username);
 	int addResponse(Response response);
 	Survey getSurveyById(int id);
-	Survey getClosedSurvey();
+	List<Survey> getClosedSurvey(String username);
 	List<Question> getQuestion(int id);
+	Response getResponse(int qid,String username);
+	void updateDistributionTable(int sid,String uname);
 	
 }
