@@ -113,7 +113,7 @@ public class SurveyController {
 		model.addAttribute("msg","distributed to "+ d2.getUserId().getUserName() + " succesfully" );
 		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
 		List<String> userList=new ArrayList<String>();
-		userObjectList.forEach((u) -> s.add(u.getUserName()));
+		userObjectList.forEach((u) -> userList.add(u.getUserName()));
 		model.addAttribute("userList", userList);
 		model.addAttribute("user",new com.adobe.prj.entity.User());
 		return "distributionForm";

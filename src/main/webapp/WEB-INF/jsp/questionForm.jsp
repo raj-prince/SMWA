@@ -17,10 +17,10 @@
     <td>
         <ul>
 		<form:select path="questionType">
-                <form:option value="oc">one correct</form:option>
-                <form:option value="mc">multi correct</form:option>
-                <form:option selected="selected" value="ol">one line</form:option>
-                <form:option value="desc">descriptive</form:option>
+                <form:option value="ONE_CORRECT">one correct</form:option>
+                <form:option value="MORE_CORRECT">multi correct</form:option>
+                <form:option selected="selected" value="ONE_LINE">one line</form:option>
+                <form:option value="DESCRIPTIVE">descriptive</form:option>
             </form:select>
        </ul>
     </td>
