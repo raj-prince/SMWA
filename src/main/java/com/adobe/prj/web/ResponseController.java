@@ -52,14 +52,19 @@ public class ResponseController {
 	}
 	
 	@RequestMapping("getSurvey.do")
+<<<<<<< HEAD
 	public String fetchSurvey(Model model,Authentication authentication){ //
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		
 		model.addAttribute("survey",responseService.getSurvey(a.getUsername()));
+=======
+	public String fetchSurvey(Model model){
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 		
 		System.out.println(model.toString());
 		model.addAttribute("msg", "checking ");
 		
+<<<<<<< HEAD
 		return "surveyList";
 		
 		
@@ -67,11 +72,21 @@ public class ResponseController {
 	
 	@RequestMapping("getClosedSurvey.do")
 	public String fetchClosedSurvey(Model model,Authentication authentication){ //
+=======
+		//System.out.println("Hello"+ user.getFirstName());
+		model.addAttribute("survey",responseService.getSurvey());
+		return "surveyList.jsp";
+	}
+	
+	@RequestMapping("getClosedSurvey.do")
+	public String fetchClosedSurvey(Model model){
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 		
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		model.addAttribute("survey",responseService.getClosedSurvey(a.getUsername()));
 		return "closedSurveyList";
 		
+<<<<<<< HEAD
 		
 	}
 	
@@ -90,6 +105,11 @@ public class ResponseController {
 		responseService.updateDistributionTable(sid,a.getUsername());   //Update distribution Table	
 		return "indexRespondent";
 		
+=======
+		//System.out.println("Hello"+ user.getFirstName());
+		model.addAttribute("survey",responseService.getClosedSurvey());
+		return "SurveyList.jsp";
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 	}
 	
 	
@@ -139,11 +159,16 @@ public class ResponseController {
        
 		model.addAttribute("survey",responseService.getSurveyById(id));
 		
+<<<<<<< HEAD
 		model.addAttribute("question",responseService.getQuestion(id));
 	
 		
 		return "showSurvey";
 }
+=======
+		return "closedSurvey.jsp";
+	}
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 	
 	@RequestMapping(value = "/showClosedSurvey/{id}", method = RequestMethod.GET)
     public String showClosedSurveyDetails(@PathVariable Integer id, Model model, HttpServletRequest req) {
@@ -152,6 +177,7 @@ public class ResponseController {
 		
 		model.addAttribute("question",responseService.getQuestion(id));
 		
+<<<<<<< HEAD
 		return "showClosedSurvey";
 }
 	
@@ -166,4 +192,8 @@ public class ResponseController {
 	
 	
 
+=======
+		return "openSurvey.jsp";
+	}
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 }

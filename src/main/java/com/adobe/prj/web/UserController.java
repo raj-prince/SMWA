@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.adobe.prj.entity.User;
 import com.adobe.prj.service.UserService;
-//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 
 @Controller
 public class UserController {
@@ -43,7 +43,12 @@ public class UserController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home( Authentication authentication) {
+<<<<<<< HEAD
 	Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+=======
+
+			Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+>>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
 			Iterator<? extends GrantedAuthority> it = user_type.iterator();
 			
 			while(it.hasNext()){
