@@ -25,10 +25,10 @@ public interface SurveyService {
 	public List<Survey> getAllSurvey(String createdBy);
 	
 	// return count of the Responded user.
-	public int cntClosedStatus(int surveyId);
+	public long cntClosedStatus(int surveyId);
 		
 	// return count of the not responded user.
-	public int cntOpenStatus(int surveyId);
+	public long cntOpenStatus(int surveyId);
 	
 	// return time stamp of the survey at the time of distribution.
 	public Date getTimeStamp(int surveyId);

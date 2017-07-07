@@ -43,9 +43,9 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 	}
 	
 	@Override
-	public int cntClosedStatus(int surveyId) {
-		TypedQuery<Integer> query = 
-				em.createQuery("select count(*) from Distribution d group by surveyId having d.SurveyStatus="+1, Integer.class);
+	public long cntClosedStatus(int surveyId) {
+		TypedQuery<Long> query = 
+				em.createQuery("select count(*) from Distribution d where d.surveyId="+surveyId+ " and d.surveyStatus=1", Long.class);
 		return query.getSingleResult();
 	}
 	
@@ -63,16 +63,17 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 	}
 
 	@Override
-	public int cntOpenStatus(int surveyId) {
-		TypedQuery<Integer> query = 
-				em.createQuery("select count(*) from Distribution d group by surveyId having d.SurveyStatus="+0, Integer.class);
+	public long cntOpenStatus(int surveyId) {
+		TypedQuery<Long> query = 
+				em.createQuery("select count(*) from Distribution d where d.surveyId="+surveyId+ " and d.surveyStatus=0", Long.class);
 		return query.getSingleResult();
 	}
 	
 	@Override
 	public Date getTimeStamp(int surveyId) {
+		System.out.println(surveyId+ "survid");
 		TypedQuery<Date> query = 
-				em.createQuery("select distinct d.Date from Distribution d where d.surveyId=" + surveyId, Date.class);
-		return query.getSingleResult();
+				em.createQuery("select d.distributionTimestamp from Distribution d where d.surveyId=" + surveyId, Date.class);
+		return query.getResultList().get(0);
 	}
 }
