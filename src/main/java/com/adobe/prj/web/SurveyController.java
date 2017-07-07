@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.adobe.prj.dto.SurveyDto;
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.QuestionType;
@@ -30,11 +31,11 @@ public class SurveyController {
 	@Autowired 
 	private SurveyService surveyService;
 	
-	@ExceptionHandler(Exception.class)
-	public String handleException(HttpServletRequest request, Exception ex){
-//		System.out.println("abcd");
-		return "error";
-	}
+//	@ExceptionHandler(Exception.class)
+//	public String handleException(HttpServletRequest request, Exception ex){
+////		System.out.println("abcd");
+//		return "error";
+//	}
 	@RequestMapping("createSurvey.do")
 	public String getSurveyForm(Model model) {
 		model.addAttribute("survey", new Survey());
@@ -89,16 +90,31 @@ public class SurveyController {
 	{
 		User a=(User) authentication.getPrincipal();
 		String createdBy=a.getUsername();
-		model.addAttribute("surveyList",surveyService.getAllSurvey(createdBy));
+		List<Survey> surveys=surveyService.getAllSurvey(createdBy);
+		List<String> surveyTitles=new ArrayList<String>();
+		surveys.forEach((s)-> surveyTitles.add(s.getSurveyTitle()));
+		model.addAttribute("surveyList",surveys);
+		model.addAttribute("surveyTitles",surveyTitles);
+		model.addAttribute("survey",new SurveyDto());
 		return "allSurveys";
 	}
 	
 	
 	@RequestMapping("distribute.do")
-	public String distribute(Model model,HttpSession session)
+	public String distribute(Model model,HttpSession session, @ModelAttribute("survey") SurveyDto sdto)
 	{
-		int surveyId=(int) session.getAttribute("surveyId");
-		Survey s = surveyService.getSurveyById(surveyId);
+		Survey s;
+		if (session.getAttribute("surveyId")!=null)
+		{
+			int surveyId=(int) session.getAttribute("surveyId");
+			 s = surveyService.getSurveyById(surveyId);
+		}
+		else
+		{
+			int surveyId=(int) sdto.getSurveyId();
+			 s = surveyService.getSurveyById(surveyId);
+		}
+		
 		model.addAttribute("user",new com.adobe.prj.entity.User());
 		
 		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);

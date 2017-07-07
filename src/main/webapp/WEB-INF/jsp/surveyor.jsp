@@ -10,6 +10,7 @@
 	<h2>Welcome</h2>
 	<div>${msg}</div>
 	<a href><a href="createSurvey.do">Create a survey</a><br />
-	<a href="reviewResponseForSurvey.do">Review surveys</a>
+	<a href="reviewResponseForSurvey.do">Review surveys</a><br/>
+	<a href="showAllSurveys.do">(Re)Distribute Surveys</a>
 </body>
 </html>
