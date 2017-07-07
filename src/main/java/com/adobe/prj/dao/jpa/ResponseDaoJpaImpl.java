@@ -37,6 +37,7 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 	@Override
 	public int addResponse(Response response) {
+		System.out.println(response.getUserName().getUserId() + "    " + response.getQuestionId().getQuestionId() );
 		em.persist(response);
 		return response.getResponseId();
 	}
@@ -67,14 +68,15 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 
 	@Override
-	public Response getResponse(int qid, int username) {
-		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+id +"and r.userId="+username,Response.class);
+	public Response getResponse(int qid, String username) {
+		System.out.println(qid +"   "+username );
+		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+id +"and r.userName="+"'"+username+"'",Response.class);
 		return query.getSingleResult();
 	}
 
 	@Override
 	public void updateDistributionTable(int sid, int uname) {
-		Query query = em.createQuery("update Distribution d set d.surveyStatus='1' where d.userId="+"'"+uname+"'");
+		Query query = em.createQuery("update Distribution d set d.surveyStatus='1' where d.userId="+"'"+uname+"'" +"and d.surveyId="+sid);
 			    
 			   query.executeUpdate();
 		

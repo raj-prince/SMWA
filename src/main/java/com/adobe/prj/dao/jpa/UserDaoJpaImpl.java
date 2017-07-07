@@ -48,7 +48,8 @@ public class UserDaoJpaImpl implements UserDao {
 	public User getUserByName(String uname) {
 		TypedQuery<User> query=em.createQuery("select u from User u where u.userName="+"'"+uname+"'",User.class);
 		
-		return query.getResultList().get(0);
+		//return query.getResultList().get(0);
+		return query.getSingleResult();
 
 	}
 
