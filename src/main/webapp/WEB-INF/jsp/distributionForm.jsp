@@ -17,8 +17,8 @@
 	<br>
 	<button type="submit" style="margin-top:15px;"> Distribute to this user </button>
 	</form:form>
-	<form action="reviewResponseForSurvey.do">
-    <input type="submit" value="Quit and Show Results" style="margin-top:5px;">
+	<form action="/">
+    <input type="submit" value="Quit" style="margin-top:5px;">
 	</form>
 </body>
 </html>

@@ -16,20 +16,22 @@
     <tr>
     <td>
         <ul style="padding-left:0px;">
-		<form:select path="questionType" style="width:200px; margin-left:0px;">
-                <form:option value="ONE_CORRECT">one correct</form:option>
+		<form:select id="qstnType" path="questionType" style="width:200px; margin-left:0px;" onchange="myFunction()">
+
+                <form:option selected="selected" value="ONE_CORRECT">one correct</form:option>
                 <form:option value="MORE_CORRECT">multi correct</form:option>
-                <form:option selected="selected" value="ONE_LINE">one line</form:option>
+                <form:option  value="ONE_LINE">one line</form:option>
                 <form:option value="DESCRIPTIVE">descriptive</form:option>
             </form:select>
        </ul>
     </td>
     </tr>
-    <tr><td><span style="width:200px; display:inline-block;">Question Text</span> <form:input path="qText" style="margin-left:-4px;"/></td> </tr>
-	 <tr><td><span style="width:200px; display:inline-block;">Option A</span><form:input path="opA"/></td> </tr>
-	<tr><td><span style="width:200px; display:inline-block;">Option B</span> <form:input path="opB" style="margin-left:-4px;"/></td> </tr>
-	<tr><td><span style="width:200px; display:inline-block;">Option C</span><form:input path="opC"/></td> </tr>
-	<tr><td><span style="width:200px; display:inline-block;">Option D</span> <form:input path="opD" style="margin-left:-4px;"/></td> </tr>
+    <tr ><td><span style="width:200px; display:inline-block;">Question Text</span> <form:input path="qText" style="margin-left:-4px;"/></td> </tr>
+	 <tr id="mcq1"><td><span style="width:200px; display:inline-block;">Option A</span><form:input path="opA"/></td> </tr>
+	<tr id="mcq2"><td><span style="width:200px; display:inline-block;">Option B</span> <form:input path="opB" style="margin-left:-4px;"/></td> </tr>
+	<tr id="mcq3"><td><span style="width:200px; display:inline-block;">Option C</span><form:input path="opC"/></td> </tr>
+	<tr id="mcq4"><td><span style="width:200px; display:inline-block;">Option D</span> <form:input path="opD" style="margin-left:-4px;"/></td> </tr>
+
 	<tr>
         <td>
            <input type="submit" value=" Save and add new question" style="margin-top: 15px;"/>
@@ -42,6 +44,29 @@
 	<form action="distribute.do">
     <input type="submit" value="Quit and Distribute" style="margin-left:4px;">
 	</form>
+	<script>
+	function myFunction(){
+	               
+		document.getElementById("mcq1").style.display = "none";
+		document.getElementById("mcq2").style.display = "none";
+		document.getElementById("mcq3").style.display = "none";
+		document.getElementById("mcq4").style.display = "none";
+	    
+	    var x = document.getElementById("qstnType").value;
+	    
+	    console.log(x);
+	  
+	    if(x == "ONE_CORRECT" || x == "MORE_CORRECT"){
+			document.getElementById("mcq1").style.display = "";
+			document.getElementById("mcq2").style.display = "";
+			document.getElementById("mcq3").style.display = "";
+			document.getElementById("mcq4").style.display = "";
+	
+	    }
+	    
+	    
+	}
+	</script>
 
 </body>
 </html>

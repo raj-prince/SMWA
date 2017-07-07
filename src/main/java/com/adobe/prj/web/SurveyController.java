@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,11 +30,19 @@ public class SurveyController {
 	@Autowired 
 	private SurveyService surveyService;
 	
+	//@ExceptionHandler(Exception.class)
+	public String handleException(HttpServletRequest request, Exception ex){
+//		System.out.println("abcd");
+		return "error";
+	}
 	@RequestMapping("createSurvey.do")
 	public String getSurveyForm(Model model) {
 		model.addAttribute("survey", new Survey());
 		return "surveyForm";
+//		throw new Exception("test exc");
 	}
+	
+	
 	
 	@RequestMapping("addSurvey.do")
 	@Transactional
@@ -74,6 +84,14 @@ public class SurveyController {
 		return "questionForm";
 	}
 	
+	@RequestMapping("showAllSurveys.do")
+	public String showAllSurveys(Model model, HttpSession session, Authentication authentication)
+	{
+		User a=(User) authentication.getPrincipal();
+		String createdBy=a.getUsername();
+		model.addAttribute("surveyList",surveyService.getAllSurvey(createdBy));
+		return "allSurveys";
+	}
 	
 	
 	@RequestMapping("distribute.do")
@@ -166,10 +184,10 @@ public class SurveyController {
 		Survey survey = surveyService.getSurvey(surveyId);
 		List<Question> listOfQuestion = surveyService.getQuestions(surveyId);
 		List<Question> mcqQuestion = new ArrayList<Question>();
-		List<Integer> cntForA = new ArrayList<Integer>();
-		List<Integer> cntForB = new ArrayList<Integer>();
-		List<Integer> cntForC = new ArrayList<Integer>();
-		List<Integer> cntForD = new ArrayList<Integer>();
+		List<Long> cntForA = new ArrayList<Long>();
+		List<Long> cntForB = new ArrayList<Long>();
+		List<Long> cntForC = new ArrayList<Long>();
+		List<Long> cntForD = new ArrayList<Long>();
 		
 		List<Question> descQuestion = new ArrayList<Question>();
 		

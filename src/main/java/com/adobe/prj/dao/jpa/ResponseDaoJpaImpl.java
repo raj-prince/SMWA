@@ -83,10 +83,10 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 	}
 	
 	@Override
-	public int count(int questionId, String ans) {
-		TypedQuery<Integer> query = 
-				em.createQuery("select count(*) from Response res group by questionId having res.responseText="+ans, Integer.class);
-		return query.getSingleResult();
+	public long count(int questionId, String ans) {
+		TypedQuery<Long> query = 
+				em.createQuery("select count(*) from Response res where res.questionId="+questionId+" and res.responseText="+"'" +ans+"'", Long.class);
+		return query.getResultList().size() == 0 ? 0 : query.getResultList().get(0);
 	}
 	
 	@Override

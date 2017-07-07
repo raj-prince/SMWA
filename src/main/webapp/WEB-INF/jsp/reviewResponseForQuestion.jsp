@@ -12,18 +12,16 @@
 </head>
 <body>
 	<%	List<Question> mcqQuestion = (List<Question>)request.getAttribute("mcqQuestion");
-		List<Integer> cntForA = (List<Integer>)request.getAttribute("cntForA");
-		List<Integer> cntForB = (List<Integer>)request.getAttribute("cntForB");
-		List<Integer> cntForC = (List<Integer>)request.getAttribute("cntForC");
-		List<Integer> cntForD = (List<Integer>)request.getAttribute("cntForD");
+		List<Long> cntForA = (List<Long>)request.getAttribute("cntForA");
+		List<Long> cntForB = (List<Long>)request.getAttribute("cntForB");
+		List<Long> cntForC = (List<Long>)request.getAttribute("cntForC");
+		List<Long> cntForD = (List<Long>)request.getAttribute("cntForD");
 		List<Question> descQuestion = (List<Question>)request.getAttribute("descQuestion");
 		List<List<String>> descAnswer = (List<List<String>>) request.getAttribute("descAnswer");
 		Survey survey = (Survey)request.getAttribute("survey");
-		
 		%>
 	<h3> Title :  <%=survey.getSurveyTitle() %></h3>
 	<h3> Description : <%=survey.getSurveyDescription() %></h3>
-	<%=mcqQuestion.size()%>
 	
 	<%
 		for (int i = 0; i < mcqQuestion.size(); i++) { 

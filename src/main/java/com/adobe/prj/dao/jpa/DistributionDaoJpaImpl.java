@@ -60,7 +60,6 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 		 allUsersSet.removeAll(alreadyDistributedSet);
 		 List<User> l1=new ArrayList<User>(allUsersSet);
 		 return l1;
-//		return null;
 	}
 
 	@Override
@@ -72,7 +71,6 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 	
 	@Override
 	public Date getTimeStamp(int surveyId) {
-		System.out.println(surveyId+ "survid");
 		TypedQuery<Date> query = 
 				em.createQuery("select d.distributionTimestamp from Distribution d where d.surveyId=" + surveyId, Date.class);
 		return query.getResultList().size()==0?null:query.getResultList().get(0);

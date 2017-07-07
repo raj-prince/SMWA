@@ -20,7 +20,7 @@ public interface ResponseDao {
 
 	 
 	 // it returns that how many user responds ans for the given question id.
-	 int count(int questionId, String ans);
+	 long count(int questionId, String ans);
 	 
 	 // it return responses of the given question id.
 	 List<String> getResponse(int questionId);

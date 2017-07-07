@@ -37,7 +37,7 @@ public interface SurveyService {
 	public List<Question> getQuestionsForReview(int surveyId);
 	
 	// return number of user response as res for given Question.
-	public int countResponse(int questionId, String res);
+	public long countResponse(int questionId, String res);
 	
 	// return survey object for survey id.
 	public Survey getSurvey(int surveyId);

@@ -90,7 +90,7 @@ public class SurveyServiceImpl implements SurveyService {
 	}
 	
 	@Override
-	public int countResponse(int questionId, String res) {
+	public long countResponse(int questionId, String res) {
 		return responseDao.count(questionId, res);
 	}
 	
