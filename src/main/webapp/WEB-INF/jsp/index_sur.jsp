@@ -12,6 +12,6 @@
 	<h2>title</h2>
 	<div>${msg}</div>
 	<a href="createSurvey.do">Create a survey</a><br />
-	<a href="distribute.do">Distribute survey</a>
+	<a href="reviewResponseForSurvey.do">Review Survey</a>
 </body>
 </html>
