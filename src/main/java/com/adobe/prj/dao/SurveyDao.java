@@ -14,4 +14,6 @@ public interface SurveyDao {
 	
 	// return survey for given survey id.
 	public Survey getSurvey(int surveyId);
+	
+	Survey getSurveyById(int surveyId);
 }

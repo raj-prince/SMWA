@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.adobe.prj.entity.Distribution;
+import com.adobe.prj.entity.Survey;
+import com.adobe.prj.entity.User;
 
 public interface DistributionDao {
 
@@ -19,5 +21,6 @@ public interface DistributionDao {
 	
 	// returns time stamp of the survey when it is being distributed.
 	public Date getTimeStamp(int surveyId);
+	public List<User> getUnsentUsers(Survey s);
 	
 }

@@ -45,4 +45,10 @@ public class SurveyDaoJpaImpl implements SurveyDao {
 		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId="+ surveyId, Survey.class);
 		return query.getSingleResult();
 	}
+
+	@Override
+	@Transactional
+	public Survey getSurveyById(int surveyId){
+		return em.find(Survey.class, surveyId);
+	}
 }

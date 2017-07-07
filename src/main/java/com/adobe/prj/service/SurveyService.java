@@ -6,6 +6,7 @@ import java.util.List;
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.Survey;
+import com.adobe.prj.entity.User;
 
 //@Service
 //@Transactional
@@ -16,7 +17,7 @@ public interface SurveyService {
 	public int addSurvey(Survey survey);
 	public int addQuestion(Question question);
 	public int distributeSurvey(Distribution distribution);
-	
+
 	// return list of distributed survesy.
 	public List<Distribution> getDistributedSurveys();
 	
@@ -43,4 +44,8 @@ public interface SurveyService {
 	
 	// return response for a given question id.
 	public List<String> getResponseForId(int questionId);
+
+	Survey getSurveyById(int sid);
+	public List<User> getUnsentUsers(Survey s);
+	public com.adobe.prj.entity.User getUserByName(String uname);
 }

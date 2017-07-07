@@ -6,15 +6,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Survey Form</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h2>Survey Form</h2>
-	<form:form commandName="survey" action="addSurvey.do">
-	Title of Survey <form:input path="surveyTitle"/> <br />
-	Description of Survey <form:input path="surveyDescription"/> <br />
-	
-	<button type="submit"> Create Survey</button>
+	<h2>Distribution Form, distribute to a user one at a time</h2>
+	<form:form commandName="user" action="addDistribution.do">
+	<form:select path="userName">
+	<form:options items="${userList}"/>
+	</form:select>
+	<button type="submit"> Distribute to this user </button>
 	</form:form>
+	
+	
+	<form action="distribute.do">
+    <input type="submit"value="Quit and Show Results">
+	</form>
 </body>
 </html>

@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 import com.adobe.prj.dao.QuestionDao;
-import com.adobe.prj.entity.Customer;
 import com.adobe.prj.entity.Question;
 
 @Repository

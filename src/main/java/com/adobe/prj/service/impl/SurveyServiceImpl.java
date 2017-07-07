@@ -11,9 +11,11 @@ import com.adobe.prj.dao.DistributionDao;
 import com.adobe.prj.dao.QuestionDao;
 import com.adobe.prj.dao.ResponseDao;
 import com.adobe.prj.dao.SurveyDao;
+import com.adobe.prj.dao.UserDao;
 import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.Survey;
+import com.adobe.prj.entity.User;
 import com.adobe.prj.service.SurveyService;
 
 @Service
@@ -31,6 +33,8 @@ public class SurveyServiceImpl implements SurveyService {
 	@Autowired
 	private ResponseDao responseDao;
 	
+	@Autowired
+	private UserDao userDao;
 	@Override
 	public List<Question> getQuestions(int id) {
 		
@@ -98,5 +102,21 @@ public class SurveyServiceImpl implements SurveyService {
 	@Override
 	public List<String> getResponseForId(int questionId) {
 		return responseDao.getResponse(questionId);
+	}
+	
+	public Survey getSurveyById(int sid){
+		return surveyDao.getSurveyById(sid);
+	}
+
+	@Override
+	public List<User> getUnsentUsers(Survey s) {
+		return distributionDao.getUnsentUsers(s);
+		
+	}
+
+	@Override
+	public User getUserByName(String uname) {
+		return userDao.getUserByName(uname);
+//		return null;
 	}
 }

@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +20,7 @@ import com.adobe.prj.entity.Distribution;
 import com.adobe.prj.entity.Question;
 import com.adobe.prj.entity.QuestionType;
 import com.adobe.prj.entity.Survey;
+import com.adobe.prj.entity.SurveyStatus;
 import com.adobe.prj.service.SurveyService;
 
 @Controller
@@ -30,28 +35,41 @@ public class SurveyController {
 	}
 	
 	@RequestMapping("addSurvey.do")
-	public String addSurvey(Model model, @ModelAttribute("survey") Survey s,
-			Authentication authentication) {
-		org.springframework.security.core.userdetails.User a = 
-				(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+	@Transactional
+	public String addSurvey(Model model, @ModelAttribute("survey") Survey s,Authentication authentication, HttpSession session)
+	{
+		User a=(User) authentication.getPrincipal();
 		s.setCreatedBy(a.getUsername());
-		surveyService.addSurvey(s);
+//		System.out.println(s.getSurveyId()+"surveyid");
 		model.addAttribute("survey2",s);
-		model.addAttribute("msg_surveyadded", "Survey" + s.getSurveyTitle() + " added successfully!!!");
-		Question q= new Question(s);
+		surveyService.addSurvey(s);
+		
+		model.addAttribute("msg", "Survey" + s.getSurveyTitle() + " added successfully!!!");
+		Question q= new Question();
+		q.setSurveyId(s);
+		System.out.println(q.getSurveyId().getSurveyId());
 		model.addAttribute("question",q);
+		System.out.println(s);
+		session.setAttribute("surveyId", s.getSurveyId());
 		return "questionForm";
 	}
 	
 	@RequestMapping("addQuestion.do")
-	public String addQuestion(Model model, @ModelAttribute("survey2") Survey sid, 
-			@ModelAttribute("question") Question q)
-	{
-//		model.addAttribute("question", new Question());
-//		Question q= new Question(sid);
+	@Transactional
+	public String addQuestion(Model model,  
+			@ModelAttribute("question") Question q, Authentication authentication, HttpSession session)
+	{	
+		
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey sid = surveyService.getSurveyById(surveyId);
+//		Survey s=(Survey) surveyService.addQuestion(question)
+		System.out.println(sid + " addques");
+		q.setSurveyId(sid);
 		surveyService.addQuestion(q);
 		model.addAttribute("msg", "question added successfully");
 		q=new Question(sid);
+		q.setSurveyId(sid);
+		System.out.println(q.getSurveyId().getSurveyId());
 		model.addAttribute("question",q);
 		return "questionForm";
 	}
@@ -59,21 +77,46 @@ public class SurveyController {
 	
 	
 	@RequestMapping("distribute.do")
-	public String distribute(Model model, @ModelAttribute("survey2") Survey s)
+	public String distribute(Model model,HttpSession session)
 	{
-		Distribution d=new Distribution();
-		d.setSurveyId(s);
-		model.addAttribute("distri",d);
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey s = surveyService.getSurveyById(surveyId);
+		model.addAttribute("user",new com.adobe.prj.entity.User());
+		
+		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
+		List<String> userList=new ArrayList<String>();
+		userObjectList.forEach((u) -> userList.add(u.getUserName()));
+		model.addAttribute("userList", userList);
 		return "distributionForm";
 		
 	}
 	
-	@RequestMapping("addDistribution.do")
-	public String addDistribution(Model model, @ModelAttribute("distri") Distribution d)
+	@RequestMapping(value="addDistribution.do")
+	public String addDistribution(Model model, @ModelAttribute("user") com.adobe.prj.entity.User u1, HttpSession session)
 	{
-		surveyService.distributeSurvey(d);
-		model.addAttribute("msg","distributed to "+ d.getUserId().getUserName() + " succesfully" );
-		return "summaryPage";
+//		Distribution d = new Distribution();
+		System.out.println("here");
+		String uname=u1.getUserName();
+		System.out.println(uname);
+		com.adobe.prj.entity.User user= surveyService.getUserByName(uname);
+		Distribution d2=new Distribution();
+//		d.setUserId(new com.adobe.prj.entity.User());
+		System.out.println(user);
+		int surveyId=(int) session.getAttribute("surveyId");
+		Survey s = surveyService.getSurveyById(surveyId);
+//		Distribution d2=new Distribution();
+		d2.setSurveyId(s);
+		d2.setSurveyStatus(SurveyStatus.OPEN);
+		d2.setDistributionTimestamp(new Date());
+		d2.setUserId(user);
+		surveyService.distributeSurvey(d2);
+		model.addAttribute("msg","distributed to "+ d2.getUserId().getUserName() + " succesfully" );
+		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
+		List<String> userList=new ArrayList<String>();
+		userObjectList.forEach((u) -> s.add(u.getUserName()));
+		model.addAttribute("userList", userList);
+		model.addAttribute("user",new com.adobe.prj.entity.User());
+		return "distributionForm";
 		
 	}
 	
