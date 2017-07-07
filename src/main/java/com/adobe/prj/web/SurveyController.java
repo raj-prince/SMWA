@@ -92,8 +92,10 @@ public class SurveyController {
 		String createdBy=a.getUsername();
 		List<Survey> surveys=surveyService.getAllSurvey(createdBy);
 		List<String> surveyTitles=new ArrayList<String>();
+		List<Integer> surveyIds=new ArrayList<Integer>();
 		surveys.forEach((s)-> surveyTitles.add(s.getSurveyTitle()));
-		model.addAttribute("surveyList",surveys);
+		surveys.forEach((s)-> surveyIds.add(s.getSurveyId()));
+		model.addAttribute("surveyIds",surveyIds);
 		model.addAttribute("surveyTitles",surveyTitles);
 		model.addAttribute("survey",new SurveyDto());
 		return "allSurveys";
@@ -104,15 +106,17 @@ public class SurveyController {
 	public String distribute(Model model,HttpSession session, @ModelAttribute("survey") SurveyDto sdto)
 	{
 		Survey s;
-		if (session.getAttribute("surveyId")!=null)
+		if (sdto==null)
 		{
 			int surveyId=(int) session.getAttribute("surveyId");
 			 s = surveyService.getSurveyById(surveyId);
 		}
 		else
 		{
+			System.out.println("herree");
 			int surveyId=(int) sdto.getSurveyId();
 			 s = surveyService.getSurveyById(surveyId);
+			 session.setAttribute("surveyId", surveyId);
 		}
 		
 		model.addAttribute("user",new com.adobe.prj.entity.User());
@@ -143,6 +147,7 @@ public class SurveyController {
 		d2.setSurveyStatus(SurveyStatus.OPEN);
 		d2.setDistributionTimestamp(new Date());
 		d2.setUserId(user);
+		System.out.println(d2.getUserId().getUserId());
 		surveyService.distributeSurvey(d2);
 		model.addAttribute("msg","distributed to "+ d2.getUserId().getUserName() + " succesfully" );
 		List<com.adobe.prj.entity.User> userObjectList=surveyService.getUnsentUsers(s);
