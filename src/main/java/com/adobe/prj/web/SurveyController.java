@@ -74,6 +74,14 @@ public class SurveyController {
 		return "questionForm";
 	}
 	
+	@RequestMapping("showAllSurveys.do")
+	public String showAllSurveys(Model model, HttpSession session, Authentication authentication)
+	{
+		User a=(User) authentication.getPrincipal();
+		String createdBy=a.getUsername();
+		model.addAttribute("surveyList",surveyService.getAllSurvey(createdBy));
+		return "allSurveys";
+	}
 	
 	
 	@RequestMapping("distribute.do")
