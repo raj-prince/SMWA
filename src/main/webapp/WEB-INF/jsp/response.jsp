@@ -5,16 +5,27 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Response</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h3>Response Is</h3>
+	<h3>Response</h3>
 	
-		
-				${response.responseText}
+	<c:if test="${isMultiple==1}">
+	<table border="1" > 
+		<tr>
+			 <th>  Response Is</th>
+		</tr>
+		<c:forEach items="${responses}" var="responses">
+			<tr>
+				<td>${responses.responseText}</td>
 				
 				
-				<a href="<c:url value='/showResponse/${surveyId}'/>"> back </a>
+			</tr>
+		</c:forEach>
+	</table>
+	</c:if>
+	
+	${response.responseText}
 	
 	
 	

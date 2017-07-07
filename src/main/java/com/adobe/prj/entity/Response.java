@@ -18,9 +18,9 @@ public class Response {
 	@Column(name="response_id")
 	private int responseId;
 	
-	@OneToOne
-	@JoinColumn(name="user_name")
-	private User userName;
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User userId;
 	
 	@ManyToOne
 	@JoinColumn(name="question_id")
@@ -44,7 +44,7 @@ public class Response {
 	 */
 	public Response(int responseId, User userId, Question questionId, String responseText) {
 		this.responseId = responseId;
-		this.userName = userId;
+		this.userId = userId;
 		this.questionId = questionId;
 		this.responseText = responseText;
 	}
@@ -70,15 +70,15 @@ public class Response {
 	/**
 	 * @return the userId
 	 */
-	public User getUserName() {
-		return userName;
+	public User getUserId() {
+		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserName(User userId) {
-		this.userName = userId;
+	public void setUserId(User userId) {
+		this.userId = userId;
 	}
 
 	/**
