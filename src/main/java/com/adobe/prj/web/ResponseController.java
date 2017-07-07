@@ -48,13 +48,18 @@ public class ResponseController {
 		String username=a.getUsername();
 		
 		User user=surveyService.getUserByName(username);
+		//System.out.println("User Id  = "+user.getUserId());
 		
 		ResponseList responseList = new ResponseList();
 	    List<ResponseDto> responses = new ArrayList<ResponseDto>();
-	    for(int i=0; i<20; i++) {
-	        responses.add(new ResponseDto());
-	       responses.get(i).setUserId(user);
-	    }
+	    for(int i=0; i<30; i++) {
+	    	ResponseDto r=new ResponseDto();
+	    	r.setUserId(user);
+	    	System.out.println(r);
+	        responses.add(r);
+//	       responses.get(i).setUserId(user);
+	       
+	       }
 	    responseList.setResponseList(responses);
 	    return responseList;
 	}
@@ -96,8 +101,8 @@ public class ResponseController {
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		User user=surveyService.getUserByName(a.getUsername());
 		for(ResponseDto response : responseList.getResponseList()) {
-			System.out.println(response.getResponseText());
-			//System.out.println(response.getQuestionId());
+			//System.out.println(response.getResponseText());
+			response.setUserId(user);
 			if(response.getResponseText()!=null)
 			responseService.addResponse(response);
 			
@@ -180,7 +185,7 @@ public class ResponseController {
 		
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		User user=surveyService.getUserByName(a.getUsername());
-		model.addAttribute("response", responseService.getResponse(id,user.getUserId()));
+		model.addAttribute("response", responseService.getResponse(id,user.getUserName()));
 		model.addAttribute("surveyId", id);
 		return "response";
 		
