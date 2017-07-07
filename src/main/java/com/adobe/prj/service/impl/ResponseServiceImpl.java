@@ -42,8 +42,11 @@ public class ResponseServiceImpl implements ResponseService{
 		Response res=new Response();
 		res.setQuestionId(getQuesById(response.getQuestionId()));
 		res.setResponseText(response.getResponseText());
-		res.setUserId(response.getUserId());
 		
+		System.out.println(response.getUserId().toString());
+		
+		res.setUserName(response.getUserId());
+		//System.out.println(res.getUserId().getUserId());
 		return responseDao.addResponse(res);
 	}
 
@@ -61,7 +64,7 @@ public class ResponseServiceImpl implements ResponseService{
 	
 
 	@Override
-	public Response getResponse(int qid, int username) {
+	public Response getResponse(int qid, String username) {
 	return responseDao.getResponse(qid,username);
 	}
 

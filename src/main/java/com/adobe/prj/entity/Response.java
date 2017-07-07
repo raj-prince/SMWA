@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Table(name="response")
@@ -17,9 +18,9 @@ public class Response {
 	@Column(name="response_id")
 	private int responseId;
 	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User userId;
+	@OneToOne
+	@JoinColumn(name="user_name")
+	private User userName;
 	
 	@ManyToOne
 	@JoinColumn(name="question_id")
@@ -43,7 +44,7 @@ public class Response {
 	 */
 	public Response(int responseId, User userId, Question questionId, String responseText) {
 		this.responseId = responseId;
-		this.userId = userId;
+		this.userName = userId;
 		this.questionId = questionId;
 		this.responseText = responseText;
 	}
@@ -69,15 +70,15 @@ public class Response {
 	/**
 	 * @return the userId
 	 */
-	public User getUserId() {
-		return userId;
+	public User getUserName() {
+		return userName;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUserName(User userId) {
+		this.userName = userId;
 	}
 
 	/**

@@ -33,10 +33,10 @@
 		</form:select></td>
 		
 		<c:if test="${ question.questionType=='ONE_CORRECT'}">
-          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/A" />${question.opA}</td> 
-          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/B" />${question.opB}</td>
-          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/C" />${question.opC}</td>
-          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/D" />${question.opD}</td>
+          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="A" />${question.opA}</td> 
+          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="B" />${question.opB}</td>
+          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="C" />${question.opC}</td>
+          <td> <form:radiobutton path="responseList[${i.index}].responseText" value="D" />${question.opD}</td>
      
 				</c:if>
 				

@@ -14,7 +14,7 @@ public interface ResponseDao {
 	 List<Survey> getClosedSurvey(int  username);
 	 List<Question>getQuestion(int id);
 
-	Response getResponse(int qid,int username);
+	Response getResponse(int qid,String username);
 	 
 	void updateDistributionTable(int sid,int uname);
 
