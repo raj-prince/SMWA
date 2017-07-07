@@ -28,10 +28,10 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 	
 	@Override
-	public List<Survey> getSurvey(String username) {
+	public List<Survey> getSurvey(int username) {
 		
 				System.out.println(username);
-		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId in (select d.surveyId from Distribution d where d.surveyStatus='1' and d.userName="+"'"+username+"'"+")", Survey.class);
+		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId in (select d.surveyId from Distribution d where d.surveyStatus='0' and d.userId="+"'"+username +"'"+")", Survey.class);
 		return query.getResultList();
 	}
 
@@ -49,8 +49,8 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 	}
 
 	@Override
-	public List<Survey> getClosedSurvey(String username) {
-		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId in (select d.surveyId from Distribution d where d.surveyStatus='0' and  d.userName="+"'"+username+"'"+")", Survey.class);
+	public List<Survey> getClosedSurvey(int username) {
+		TypedQuery<Survey> query = em.createQuery("select s from Survey s where s.surveyId in (select d.surveyId from Distribution d where d.surveyStatus='1' and  d.userId="+username+")", Survey.class);
 		
 		System.out.println(username);
 		return query.getResultList();
@@ -67,14 +67,14 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 
 	@Override
-	public Response getResponse(int qid, String username) {
-		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId=."+id +"and r.userName="+"'"+username+"'",Response.class);
+	public Response getResponse(int qid, int username) {
+		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+id +"and r.userId="+username,Response.class);
 		return query.getSingleResult();
 	}
 
 	@Override
-	public void updateDistributionTable(int sid, String uname) {
-		Query query = em.createQuery("update Distribution d set d.surveyStatus='0' where d.userName="+"'"+uname+"'");
+	public void updateDistributionTable(int sid, int uname) {
+		Query query = em.createQuery("update Distribution d set d.surveyStatus='1' where d.userId="+"'"+uname+"'");
 			    
 			   query.executeUpdate();
 		

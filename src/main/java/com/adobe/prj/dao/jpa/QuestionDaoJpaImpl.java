@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.adobe.prj.dao.QuestionDao;
 import com.adobe.prj.entity.Question;
+import com.adobe.prj.entity.Survey;
 
 @Repository
 public class QuestionDaoJpaImpl implements QuestionDao {
@@ -28,5 +29,12 @@ public class QuestionDaoJpaImpl implements QuestionDao {
 	public List<Question> getQuestions(int surveyId) {
 		TypedQuery<Question> query = em.createQuery("select q from Question q where q.surveyId=" + surveyId, Question.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public Question getQuesById(int qid) {
+		return em.find(Question.class, qid);
+
+		
 	}
 }

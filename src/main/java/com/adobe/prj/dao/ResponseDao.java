@@ -8,16 +8,16 @@ import com.adobe.prj.entity.Survey;
 
 public interface ResponseDao {
 	
-	 List<Survey> getSurvey(String username);
+	 List<Survey> getSurvey(int username);
 	 int addResponse(Response response);
 	 Survey getSurveyById(int id);
-	 List<Survey> getClosedSurvey(String username);
+	 List<Survey> getClosedSurvey(int  username);
 	 List<Question>getQuestion(int id);
-<<<<<<< HEAD
-	Response getResponse(int qid,String username);
+
+	Response getResponse(int qid,int username);
 	 
-	void updateDistributionTable(int sid,String uname);
-=======
+	void updateDistributionTable(int sid,int uname);
+
 	 
 	 // it returns that how many user responds ans for the given question id.
 	 int count(int questionId, String ans);
@@ -25,7 +25,7 @@ public interface ResponseDao {
 	 // it return responses of the given question id.
 	 List<String> getResponse(int questionId);
 
-	
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+
+
 
 }

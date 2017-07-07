@@ -37,18 +37,24 @@ public class UserDaoJpaImpl implements UserDao {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public User getUser(String username) {
 		
 		TypedQuery<User> query = em.createQuery("select u from User u where u.userName=:username", User.class);
 		query.setParameter("username", username);
 		//return em.find(User.class, username);
 	   return query.getSingleResult();
-=======
+	}
 	public User getUserByName(String uname) {
 		TypedQuery<User> query=em.createQuery("select u from User u where u.userName="+"'"+uname+"'",User.class);
 		
 		return query.getResultList().get(0);
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+
+	}
+
+	@Override
+	public User getUserById(int uid) {
+		TypedQuery<User> query = em.createQuery("select u from User u where u.userId="+uid, User.class);
+		return query.getSingleResult();
 	}
 }

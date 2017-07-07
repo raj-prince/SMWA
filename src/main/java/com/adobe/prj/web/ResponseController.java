@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.adobe.prj.dto.ResponseDto;
 import com.adobe.prj.entity.Rental;
 import com.adobe.prj.entity.Response;
 import com.adobe.prj.entity.ResponseList;
 import com.adobe.prj.entity.User;
 import com.adobe.prj.service.ResponseService;
+import com.adobe.prj.service.SurveyService;
 import com.adobe.prj.service.UserService;
 
 @Controller
@@ -32,61 +34,59 @@ public class ResponseController {
 	ResponseService responseService;
 	
 	@Autowired
+	SurveyService surveyService;
+	
+	@Autowired
 	UserService userService;
+	
+	
 	
 	@ModelAttribute("responseList")
 	public ResponseList populate(Authentication authentication)
 	{
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		String username=a.getUsername();
-		User user=new User();
-		user.setUserName(username);
+		
+		User user=surveyService.getUserByName(username);
+		
 		ResponseList responseList = new ResponseList();
-	    List<Response> responses = new ArrayList<Response>();
+	    List<ResponseDto> responses = new ArrayList<ResponseDto>();
 	    for(int i=0; i<20; i++) {
-	        responses.add(new Response());
-	       responses.get(i).setUserName(user);
+	        responses.add(new ResponseDto());
+	       responses.get(i).setUserId(user);
 	    }
 	    responseList.setResponseList(responses);
 	    return responseList;
 	}
 	
 	@RequestMapping("getSurvey.do")
-<<<<<<< HEAD
+
 	public String fetchSurvey(Model model,Authentication authentication){ //
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		
-		model.addAttribute("survey",responseService.getSurvey(a.getUsername()));
-=======
-	public String fetchSurvey(Model model){
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+		model.addAttribute("survey",responseService.getSurvey(surveyService.getUserByName(a.getUsername()).getUserId()));
+
+	   
 		
 		System.out.println(model.toString());
 		model.addAttribute("msg", "checking ");
 		
-<<<<<<< HEAD
+
 		return "surveyList";
 		
 		
 	}
 	
-	@RequestMapping("getClosedSurvey.do")
-	public String fetchClosedSurvey(Model model,Authentication authentication){ //
-=======
-		//System.out.println("Hello"+ user.getFirstName());
-		model.addAttribute("survey",responseService.getSurvey());
-		return "surveyList.jsp";
-	}
+	
 	
 	@RequestMapping("getClosedSurvey.do")
-	public String fetchClosedSurvey(Model model){
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+	public String fetchClosedSurvey(Model model,Authentication authentication){
+
 		
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-		model.addAttribute("survey",responseService.getClosedSurvey(a.getUsername()));
+		model.addAttribute("survey",responseService.getClosedSurvey(surveyService.getUserByName(a.getUsername()).getUserId()));
 		return "closedSurveyList";
-		
-<<<<<<< HEAD
+
 		
 	}
 	
@@ -94,22 +94,18 @@ public class ResponseController {
 	@RequestMapping(value="/*/addResponse.do",method = RequestMethod.POST)
 	public String addResponse(@RequestParam("sid") int sid,@ModelAttribute("responseList") ResponseList responseList, Model model,Authentication authentication){
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-		
-		for(Response response : responseList.getResponseList()) {
+		User user=surveyService.getUserByName(a.getUsername());
+		for(ResponseDto response : responseList.getResponseList()) {
 			System.out.println(response.getResponseText());
 			//System.out.println(response.getQuestionId());
 			if(response.getResponseText()!=null)
 			responseService.addResponse(response);
 			
 		    }
-		responseService.updateDistributionTable(sid,a.getUsername());   //Update distribution Table	
+		responseService.updateDistributionTable(sid,user.getUserId());   //Update distribution Table	
 		return "indexRespondent";
 		
-=======
-		//System.out.println("Hello"+ user.getFirstName());
-		model.addAttribute("survey",responseService.getClosedSurvey());
-		return "SurveyList.jsp";
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+
 	}
 	
 	
@@ -159,16 +155,14 @@ public class ResponseController {
        
 		model.addAttribute("survey",responseService.getSurveyById(id));
 		
-<<<<<<< HEAD
+
 		model.addAttribute("question",responseService.getQuestion(id));
 	
 		
 		return "showSurvey";
 }
-=======
-		return "closedSurvey.jsp";
-	}
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
+
+		
 	
 	@RequestMapping(value = "/showClosedSurvey/{id}", method = RequestMethod.GET)
     public String showClosedSurveyDetails(@PathVariable Integer id, Model model, HttpServletRequest req) {
@@ -177,23 +171,21 @@ public class ResponseController {
 		
 		model.addAttribute("question",responseService.getQuestion(id));
 		
-<<<<<<< HEAD
+
 		return "showClosedSurvey";
 }
 	
 	@RequestMapping(value = "/showResponse/{id}", method = RequestMethod.GET)
 	  public String showResponse(@PathVariable Integer id, Model model,Authentication authentication) {
+		
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
-		model.addAttribute("response", responseService.getResponse(id,a.getUsername()));
+		User user=surveyService.getUserByName(a.getUsername());
+		model.addAttribute("response", responseService.getResponse(id,user.getUserId()));
 		model.addAttribute("surveyId", id);
 		return "response";
 		
 	}
+}
 	
 	
 
-=======
-		return "openSurvey.jsp";
-	}
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
-}

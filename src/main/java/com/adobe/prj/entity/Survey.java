@@ -110,10 +110,6 @@ public class Survey {
 		this.createdBy = string;
 	}
 
-	@Override
-	public String toString() {
-		return "Survey [surveyId=" + surveyId + ", surveyTitle=" + surveyTitle + ", surveyDescription="
-				+ surveyDescription + ", createdBy=" + createdBy + "]";
-	}
+	
 	
 }

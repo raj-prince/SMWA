@@ -25,20 +25,14 @@
 			<td>${question.questionType}</td>
 		
 				<td>${question.qText}</td>
-	
-<!-- 	 	<spring:bind path="responseList[${i.index}].questionId" >
- 	<input  type="hidden" name="responseList[${i.index}].questionId" value="${question.questionId}"/>
-	 	</spring:bind>
-	  	<form:input path="responseList[${i.index}].questionId" value="1"/>
-	  	
-		-->	
+ 
 		<td>
 		<form:select path="responseList[${i.index}].questionId" >
 		<form:option value="${question.questionId}" >Id
 		</form:option>
 		</form:select></td>
 		
-		<c:if test="${ question.questionType=='1'}">
+		<c:if test="${ question.questionType=='ONE_CORRECT'}">
           <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/A" />${question.opA}</td> 
           <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/B" />${question.opB}</td>
           <td> <form:radiobutton path="responseList[${i.index}].responseText" value="${question.questionId}/qid/C" />${question.opC}</td>
@@ -46,7 +40,7 @@
      
 				</c:if>
 				
-			<c:if test="${ question.questionType=='2'}">
+			<c:if test="${ question.questionType=='MORE_CORRECT'}">
      
 			<td><form:checkbox path="responseList[${i.index}].responseText" value="A"/>${question.opA}</td>
 			
@@ -57,14 +51,14 @@
 			<td><form:checkbox path="responseList[${i.index}].responseText" value="D"/>${question.opD}</td>
 			
 			</c:if>
-				<c:if test="${ question.questionType=='3' }">
+				<c:if test="${ question.questionType=='ONE_LINE' }">
         <td colspan="2">
 				<form:input path="responseList[${i.index}].responseText"/></td>
 				</c:if>
 				
 				
 				
-					<c:if test="${ question.questionType=='4' }">
+					<c:if test="${ question.questionType=='DESCRIPTIVE' }">
         <td colspan="2">
 			<form:input path="responseList[${i.index}].responseText"/>	</td>
 				</c:if>

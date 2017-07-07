@@ -9,4 +9,5 @@ public interface QuestionDao {
 	
 	// return all question of a given survey.
 	public List<Question> getQuestions(int surveyId);
+	public Question getQuesById(int qid);
 }

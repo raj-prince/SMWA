@@ -11,17 +11,12 @@
 <body>
 	<h2>title</h2>
 	<div>${msg}</div>
-<<<<<<< HEAD
+
 	<h5>Hello  ${userName} </h5>
 	<a href="getSurvey.do">Get surveys for you !</a><br />
 	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
 	
-=======
-	<a href="getSurvey.do">Get surveys for you !</a><br />
-	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
-	<a href="newResponse.do">Give Response For This Survey !</a><br />
->>>>>>> e555c361c6254ec4db8a69797c4e96cec56aa767
-	
+
 	
 </body>
 </html>
