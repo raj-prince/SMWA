@@ -11,14 +11,17 @@
 	<h3>Surveys</h3>
 	<table border="1" > 
 		<tr>
-			<th>ID</th><th>Title</th><th>Description</th> <th> Show Survey</th>
+			<th>Type</th><th>Question</th><th>OptionA</th> <th> Option B</th><th>Option C</th><th>Option D</th>
 		</tr>
-		<c:forEach items="${survey}" var="surveys">
+		<c:forEach items="${question}" var="question">
 			<tr>
-				<td>${surveys.surveyId}</td>
-				<td>${surveys.surveyTitle}</td>
-				<td>${surveys.surveyDescription}</td>
-				<td><a href="<c:url value='/showSurvey/${surveys.surveyId}'/>"> show </a> </td>
+				<td>${question.questionType}</td>
+				<td>${question.qText}</td>
+				<td>${question.opA}</td>
+				<td>${question.opB}</td>
+				<td>${question.opC}</td>
+				<td>${question.opD}</td>
+				<td><a href="<c:url value='/showResponse/${question.questionId}'/>"> show </a> </td>
 			</tr>
 		</c:forEach>
 	</table>

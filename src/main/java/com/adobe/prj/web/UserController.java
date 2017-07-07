@@ -44,7 +44,10 @@ public class UserController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String home( Authentication authentication) {
 
-			Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+	Collection<? extends GrantedAuthority> user_type = authentication.getAuthorities();
+
+
+
 			Iterator<? extends GrantedAuthority> it = user_type.iterator();
 			
 			while(it.hasNext()){
@@ -54,7 +57,7 @@ public class UserController {
 				}
 				else if(authority.equals("1"))
 				{
-					return "respondent";
+					return "indexRespondent";
 				}
 				else
 				{
@@ -65,5 +68,6 @@ public class UserController {
 //			Object[] arr=user_type.toArray();
 //			;
 			return "home";
+
 	}
 }

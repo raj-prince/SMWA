@@ -7,5 +7,7 @@ import com.adobe.prj.entity.User;
 public interface UserService {
 	List<User> getUsers();
 	int addUser(User user);
+	User getUser(String username);
+	User getUserById(int uid);
 
 }
