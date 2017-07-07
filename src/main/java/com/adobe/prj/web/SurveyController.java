@@ -107,7 +107,7 @@ public class SurveyController {
 	public String distribute(Model model,HttpSession session, @ModelAttribute("survey") SurveyDto sdto)
 	{
 		Survey s;
-		if (sdto==null)
+		if (sdto.getSurveyId()==0)
 		{
 			int surveyId=(int) session.getAttribute("surveyId");
 			 s = surveyService.getSurveyById(surveyId);

@@ -39,18 +39,12 @@ public class ResponseController {
 	UserService userService;
 	
 	
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-=======
-	@ExceptionHandler(Exception.class)
+
+	//@ExceptionHandler(Exception.class)
 	public String handleException(HttpServletRequest request, Exception ex){
 		return "error";
 	}
->>>>>>> 5e5711315874a2c8aef16b1d987520d60d813d2d
+
 	@ModelAttribute("responseList")
 	public ResponseList populate(Authentication authentication)
 	{

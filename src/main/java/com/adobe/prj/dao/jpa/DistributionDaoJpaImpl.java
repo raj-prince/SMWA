@@ -53,6 +53,7 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 	public List<User> getUnsentUsers(Survey s) {
 		TypedQuery<User> query = em.createQuery("select u from User u", User.class);
 		 List<User> allUsers = query.getResultList();
+		 System.out.println("Check " + s);
 		 TypedQuery<User> query2 = em.createQuery("select d.userId from Distribution d where d.surveyId="+s.getSurveyId(), User.class);
 		 List<User> alreadyDistributed= query2.getResultList();
 		 Set<User> allUsersSet= new HashSet<>(allUsers);
