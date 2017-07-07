@@ -127,6 +127,15 @@ public class Distribution {
 	public void setDistributionTimestamp(Date distributionTimestamp) {
 		this.distributionTimestamp = distributionTimestamp;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Distribution [distributionId=" + distributionId + ", surveyId=" + surveyId + ", userId=" + userId
+				+ ", surveyStatus=" + surveyStatus + ", distributionTimestamp=" + distributionTimestamp + "]";
+	}
 	
 	
 }

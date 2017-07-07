@@ -15,8 +15,8 @@
 	<table>
     <tr>
     <td>
-        <ul>
-		<form:select path="questionType">
+        <ul style="padding-left:0px;">
+		<form:select path="questionType" style="width:200px; margin-left:0px;">
                 <form:option value="ONE_CORRECT">one correct</form:option>
                 <form:option value="MORE_CORRECT">multi correct</form:option>
                 <form:option selected="selected" value="ONE_LINE">one line</form:option>
@@ -25,14 +25,14 @@
        </ul>
     </td>
     </tr>
-    <tr><td>Question Text <form:input path="qText"/></td> </tr>
-	 <tr><td>Option A <form:input path="opA"/></td> </tr>
-	<tr><td>Option B <form:input path="opB"/></td> </tr>
-	<tr><td>Option C <form:input path="opC"/></td> </tr>
-	<tr><td>Option D <form:input path="opD"/></td> </tr>
+    <tr><td><span style="width:200px; display:inline-block;">Question Text</span> <form:input path="qText" style="margin-left:-4px;"/></td> </tr>
+	 <tr><td><span style="width:200px; display:inline-block;">Option A</span><form:input path="opA"/></td> </tr>
+	<tr><td><span style="width:200px; display:inline-block;">Option B</span> <form:input path="opB" style="margin-left:-4px;"/></td> </tr>
+	<tr><td><span style="width:200px; display:inline-block;">Option C</span><form:input path="opC"/></td> </tr>
+	<tr><td><span style="width:200px; display:inline-block;">Option D</span> <form:input path="opD" style="margin-left:-4px;"/></td> </tr>
 	<tr>
         <td>
-           <input type="submit" value=" Save and add new question"/>
+           <input type="submit" value=" Save and add new question" style="margin-top: 15px;"/>
         </td>
     </tr>
     
@@ -40,7 +40,7 @@
 	</form:form>
 	
 	<form action="distribute.do">
-    <input type="submit"value="Quit and Distribute">
+    <input type="submit" value="Quit and Distribute" style="margin-left:4px;">
 	</form>
 
 </body>

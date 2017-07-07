@@ -11,10 +11,10 @@
 <body>
 	<h2>Survey Form</h2>
 	<form:form commandName="survey" action="addSurvey.do">
-	Title of Survey <form:input path="surveyTitle"/> <br />
-	Description of Survey <form:input path="surveyDescription"/> <br />
+	<span style="width:200px; display:inline-block;">Title of Survey</span> <form:input path="surveyTitle" style="margin-left:-4px;"/> <br /><br />
+	<span style="width:200px; display:inline-block;">Description of Survey</span><form:input path="surveyDescription"/> <br />
 	
-	<button type="submit"> Create Survey</button>
+	<button type="submit" style="margin-top:20px;"> Create Survey</button>
 	</form:form>
 </body>
 </html>

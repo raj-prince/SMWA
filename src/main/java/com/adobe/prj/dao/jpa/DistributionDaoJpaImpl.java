@@ -25,6 +25,7 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 
 	@Override
 	public int distributeSurvey(Distribution distribution) {
+		System.out.println(distribution);
 		em.persist(distribution);
 		return distribution.getDistributionId();
 	}
@@ -74,6 +75,6 @@ public class DistributionDaoJpaImpl implements DistributionDao {
 		System.out.println(surveyId+ "survid");
 		TypedQuery<Date> query = 
 				em.createQuery("select d.distributionTimestamp from Distribution d where d.surveyId=" + surveyId, Date.class);
-		return query.getResultList().get(0);
+		return query.getResultList().size()==0?null:query.getResultList().get(0);
 	}
 }

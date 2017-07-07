@@ -10,9 +10,10 @@
 <title>Review Response</title>
 </head>
 <body>
-	<a id="id1" href="reviewResponseQuestion.do?">link </a>
-	
 	<h3>Review Response For Survey</h3>
+	<h4><span style="width:500px; display:inline-block;">Name of Survey(TimeStamp)</span>
+	<span style="width:150px; display:inline-block;">Distribution Count</span>
+	<span style="width:150px; display:inline-block;">Response Count</span></h4>
 	
 		<%
 		List<Long> ltotal = (List<Long>)request.getAttribute("totalCntList");
@@ -22,8 +23,17 @@
 		List<String> lsurveyTitle = (List<String>)request.getAttribute("surveyTitleList");
 		int len = ltotal.size();
 		for (int i = 0; i < len; i++) { %>
-			<a href="reviewResponseForQuestion.do?surveyId=<%=lsurveyId.get(i)+" "%>"><%=lsurveyTitle.get(i)%></a>
-			<%=ldistribution.get(i) + " "%> <%= ltotal.get(i) + " " %><%=lresponse.get(i) + " " %>
+			<span style="width:500px; display:inline-block;">
+				<a href="reviewResponseForQuestion.do?surveyId=<%=lsurveyId.get(i)%>">
+					<%=lsurveyTitle.get(i)%>
+				</a>
+			
+			(<%=ldistribution.get(i)==null?"0": ldistribution.get(i)+ " "%>) 
+			</span>
+			
+			<span style="width:150px; display:inline-block;"><%= ltotal.get(i) + " " %></span>
+			<span style="width:150px; display:inline-block;"><%=lresponse.get(i) + " " %></span>
+			<br>
 		<%}%>
 </body>
 </html>

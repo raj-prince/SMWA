@@ -11,7 +11,7 @@
 <title>Review Question Analysis!</title>
 </head>
 <body>
-	<%	List<Question> mcqQuestion = (List<Question>)request.getAttribute("totalCntList");
+	<%	List<Question> mcqQuestion = (List<Question>)request.getAttribute("mcqQuestion");
 		List<Integer> cntForA = (List<Integer>)request.getAttribute("cntForA");
 		List<Integer> cntForB = (List<Integer>)request.getAttribute("cntForB");
 		List<Integer> cntForC = (List<Integer>)request.getAttribute("cntForC");
@@ -23,6 +23,7 @@
 		%>
 	<h3> Title :  <%=survey.getSurveyTitle() %></h3>
 	<h3> Description : <%=survey.getSurveyDescription() %></h3>
+	<%=mcqQuestion.size()%>
 	
 	<%
 		for (int i = 0; i < mcqQuestion.size(); i++) { 

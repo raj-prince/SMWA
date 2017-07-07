@@ -194,7 +194,7 @@ public class SurveyController {
 		model.addAttribute("cntForB", cntForB);
 		model.addAttribute("cntForC", cntForC);
 		model.addAttribute("cntForD", cntForD);
-		model.addAttribute("descQuestoin", descQuestion);
+		model.addAttribute("descQuestion", descQuestion);
 		model.addAttribute("descAnswer", descAnswer);
 		
 		return "reviewResponseForQuestion";
