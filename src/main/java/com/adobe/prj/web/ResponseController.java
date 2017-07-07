@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.adobe.prj.dto.ResponseDto;
-import com.adobe.prj.entity.Rental;
-import com.adobe.prj.entity.Response;
+import com.adobe.prj.entity.QuestionType;
 import com.adobe.prj.entity.ResponseList;
 import com.adobe.prj.entity.User;
 import com.adobe.prj.service.ResponseService;
@@ -38,6 +36,10 @@ public class ResponseController {
 	
 	@Autowired
 	UserService userService;
+	
+	
+	
+	
 	
 	
 	
@@ -185,9 +187,20 @@ public class ResponseController {
 		
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		User user=surveyService.getUserByName(a.getUsername());
-		model.addAttribute("response", responseService.getResponse(id,user.getUserName()));
 		model.addAttribute("surveyId", id);
-		return "response";
+		if(responseService.getQuesById(id).getQuestionType()==QuestionType.MORE_CORRECT)
+		{
+			System.out.println("More correct ");
+			model.addAttribute("responses", responseService.getResponse(id,user.getUserId()));
+			model.addAttribute("isMultiple", 1);
+		}
+		else
+			model.addAttribute("response",responseService.getSingleResponse(id,user.getUserId() ));
+		
+	
+			return "response";
+		
+		
 		
 	}
 }
