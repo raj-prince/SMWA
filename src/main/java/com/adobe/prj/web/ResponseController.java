@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +39,18 @@ public class ResponseController {
 	UserService userService;
 	
 	
+<<<<<<< HEAD
 	
 	
 	
 	
 	
+=======
+	@ExceptionHandler(Exception.class)
+	public String handleException(HttpServletRequest request, Exception ex){
+		return "error";
+	}
+>>>>>>> 5e5711315874a2c8aef16b1d987520d60d813d2d
 	@ModelAttribute("responseList")
 	public ResponseList populate(Authentication authentication)
 	{
