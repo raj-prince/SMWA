@@ -18,7 +18,7 @@
 				<td>${surveys.surveyId}</td>
 				<td>${surveys.surveyTitle}</td>
 				<td>${surveys.surveyDescription}</td>
-				<td><a href="<c:url value='/showSurvey/${surveys.surveyId}'/>"> show </a> </td>
+				<td><a href="<c:url value='/showClosedSurvey/${surveys.surveyId}'/>"> show </a> </td>
 			</tr>
 		</c:forEach>
 	</table>

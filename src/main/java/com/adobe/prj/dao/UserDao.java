@@ -7,7 +7,8 @@ import com.adobe.prj.entity.User;
 public interface UserDao {
 	List<User> getUsers();
 	int addUser(User user);
-	User getUser(int userId);
+	User getUser(String username);
 	void updateUser(User user);
 	User getUserByName(String uname);
+	User getUserById(int uid);
 }
