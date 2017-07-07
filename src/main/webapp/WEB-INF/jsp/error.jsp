@@ -8,5 +8,6 @@
 </head>
 <body>
 	Some Error Occurred 
+	<a href="/">Home</a>
 </body>
 </html>

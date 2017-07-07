@@ -16,7 +16,7 @@
     <tr>
     <td>
         <ul>
-		<form:select path="questionType">
+		<form:select path="questionType" id="qstnType" onchange="myFunction()">
                 <form:option value="ONE_CORRECT">one correct</form:option>
                 <form:option value="MORE_CORRECT">multi correct</form:option>
                 <form:option selected="selected" value="ONE_LINE">one line</form:option>
@@ -26,10 +26,12 @@
     </td>
     </tr>
     <tr><td>Question Text <form:input path="qText"/></td> </tr>
-	 <tr><td>Option A <form:input path="opA"/></td> </tr>
-	<tr><td>Option B <form:input path="opB"/></td> </tr>
-	<tr><td>Option C <form:input path="opC"/></td> </tr>
-	<tr><td>Option D <form:input path="opD"/></td> </tr>
+    
+	 <tr id="mcq1"><td>Option A <form:input path="opA"/></td> </tr>
+	<tr id="mcq2"><td>Option B <form:input path="opB"/></td> </tr>
+	<tr id="mcq3"><td>Option C <form:input path="opC"/></td> </tr>
+	<tr id="mcq4"><td>Option D <form:input path="opD"/></td> </tr>
+	
 	<tr>
         <td>
            <input type="submit" value=" Save and add new question"/>
@@ -42,6 +44,29 @@
 	<form action="distribute.do">
     <input type="submit"value="Quit and Distribute">
 	</form>
+	<script>
+	function myFunction(){
+	               
+		document.getElementById("mcq1").style.display = "none";
+		document.getElementById("mcq2").style.display = "none";
+		document.getElementById("mcq3").style.display = "none";
+		document.getElementById("mcq4").style.display = "none";
+	    
+	    var x = document.getElementById("qstnType").value;
+	    
+	    console.log(x);
+	  
+	    if(x == "ONE_CORRECT" || x == "MORE_CORRECT"){
+			document.getElementById("mcq1").style.display = "";
+			document.getElementById("mcq2").style.display = "";
+			document.getElementById("mcq3").style.display = "";
+			document.getElementById("mcq4").style.display = "";
+	
+	    }
+	    
+	    
+	}
+	</script>
 
 </body>
 </html>
