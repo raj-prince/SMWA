@@ -37,7 +37,7 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 	@Override
 	public int addResponse(Response response) {
-		System.out.println(response.getUserName().getUserId() + "    " + response.getQuestionId().getQuestionId() );
+		//System.out.println(response.getUserName().getUserId() + "    " + response.getQuestionId().getQuestionId() );
 		em.persist(response);
 		return response.getResponseId();
 	}
@@ -68,10 +68,10 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 
 
 	@Override
-	public Response getResponse(int qid, String username) {
-		System.out.println(qid +"   "+username );
-		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+id +"and r.userName="+"'"+username+"'",Response.class);
-		return query.getSingleResult();
+	public List<Response> getResponse(int qid, int userid) {
+		System.out.println(qid +"   "+userid );
+		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+qid +"and r.userId="+userid,Response.class);
+		return query.getResultList();
 	}
 
 	@Override
@@ -94,6 +94,12 @@ public class ResponseDaoJpaImpl implements ResponseDao {
 		TypedQuery<String> query = 
 				em.createQuery("select res.responseText from Response res where res.questionId="+questionId, String.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public Response getSingleResponse(int qid, int userid) {
+		TypedQuery<Response> query = em.createQuery("select r from Response r where r.questionId="+qid +"and r.userId="+userid,Response.class);
+		return query.getSingleResult();
 	}
 	
 }

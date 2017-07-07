@@ -13,6 +13,7 @@ import com.adobe.prj.dto.ResponseDto;
 import com.adobe.prj.entity.Response;
 import com.adobe.prj.entity.Survey;
 import com.adobe.prj.entity.Question;
+import com.adobe.prj.entity.QuestionType;
 import com.adobe.prj.service.ResponseService;
 
 @Service
@@ -39,15 +40,52 @@ public class ResponseServiceImpl implements ResponseService{
 
 	@Override
 	public int addResponse(ResponseDto response) {
-		Response res=new Response();
+		
+		
+		int qid=response.getQuestionId();
+		Question ques=questionDao.getQuesById(qid);
+		String ans,parsedAns;
+		ans=response.getResponseText();
+		int idx=ans.indexOf(',');
+		if(ques.getQuestionType()==QuestionType.MORE_CORRECT && idx!=-1)
+		{
+			
+			
+			System.out.println(idx);
+			
+			while((idx!=-1))
+			    {
+				parsedAns=ans.substring(0,idx);
+				System.out.println(parsedAns+"  ");
+				Response res=new Response();
+				res.setQuestionId(getQuesById(response.getQuestionId()));
+				res.setResponseText(parsedAns);
+				res.setUserId(response.getUserId());
+				responseDao.addResponse(res);
+				ans=ans.substring(idx+1);
+				idx=ans.indexOf(',');
+				
+					}
+			Response res=new Response();
+			res.setQuestionId(getQuesById(response.getQuestionId()));
+			res.setResponseText(ans);
+			res.setUserId(response.getUserId());
+			return responseDao.addResponse(res);
+			
+		}
+		
+		else{
+			Response res=new Response();
 		res.setQuestionId(getQuesById(response.getQuestionId()));
 		res.setResponseText(response.getResponseText());
 		
-		System.out.println(response.getUserId().toString());
 		
-		res.setUserName(response.getUserId());
-		//System.out.println(res.getUserId().getUserId());
+		
+		res.setUserId(response.getUserId());
+		
+		
 		return responseDao.addResponse(res);
+		}
 	}
 
 	@Override
@@ -64,8 +102,8 @@ public class ResponseServiceImpl implements ResponseService{
 	
 
 	@Override
-	public Response getResponse(int qid, String username) {
-	return responseDao.getResponse(qid,username);
+	public List<Response> getResponse(int qid, int userid) {
+	return responseDao.getResponse(qid,userid);
 	}
 
 	@Override
@@ -77,6 +115,12 @@ public class ResponseServiceImpl implements ResponseService{
 	@Override
 	public Question getQuesById(int qid) {
 		return questionDao.getQuesById(qid);
+	}
+
+	@Override
+	public Response getSingleResponse(int qid, int userid) {
+	
+		return responseDao.getSingleResponse(qid,userid);
 	}
 	
 
