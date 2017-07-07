@@ -14,10 +14,10 @@ public interface DistributionDao {
 	public List<Distribution> getDistributedSurveys();
 	
 	// return count of the Responded user.
-	public int cntClosedStatus(int surveyId);
+	public long cntClosedStatus(int surveyId);
 	
 	// return count of the not responded user.
-	public int cntOpenStatus(int surveyId);
+	public long cntOpenStatus(int surveyId);
 	
 	// returns time stamp of the survey when it is being distributed.
 	public Date getTimeStamp(int surveyId);

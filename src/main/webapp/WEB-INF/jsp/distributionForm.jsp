@@ -18,7 +18,7 @@
 	</form:form>
 	
 	
-	<form action="distribute.do">
+	<form action="reviewResponseForSurvey.do">
     <input type="submit"value="Quit and Show Results">
 	</form>
 </body>

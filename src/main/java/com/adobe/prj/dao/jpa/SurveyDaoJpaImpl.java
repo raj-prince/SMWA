@@ -36,7 +36,7 @@ public class SurveyDaoJpaImpl implements SurveyDao {
 	
 	@Override
 	public List<Survey> getAllSurvey(String createdBy) {
-		TypedQuery<Survey> query = em.createQuery("select s from Survey s  where s.createdBy=" + createdBy, Survey.class);
+		TypedQuery<Survey> query = em.createQuery("select s from Survey s  where s.createdBy=" + "'"+createdBy+"'", Survey.class);
 		return query.getResultList();
 	}
 	

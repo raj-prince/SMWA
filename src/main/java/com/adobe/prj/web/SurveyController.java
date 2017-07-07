@@ -132,14 +132,14 @@ public class SurveyController {
 				(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		String currentUserName = currentUser.getUsername();
 		List<Survey> allCreatedSurvey = surveyService.getAllSurvey(currentUserName);
-		List<Integer> totalCntList = new ArrayList<Integer>();
-		List<Integer> responseCntList = new ArrayList<Integer>();
+		List<Long> totalCntList = new ArrayList<Long>();
+		List<Long> responseCntList = new ArrayList<Long>();
 		List<Date> distributionDate = new ArrayList<Date>();
 		List<Integer> surveyIdList = new ArrayList<Integer>();
 		List<String> surveyTitleList = new ArrayList<String>();
 		for (Survey s : allCreatedSurvey) {
-			int open = surveyService.cntOpenStatus(s.getSurveyId());
-			int closed = surveyService.cntClosedStatus(s.getSurveyId());
+			long open = surveyService.cntOpenStatus(s.getSurveyId());
+			long closed = surveyService.cntClosedStatus(s.getSurveyId());
 			surveyIdList.add(s.getSurveyId());
 			totalCntList.add(open + closed);
 			responseCntList.add(open);
