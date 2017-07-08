@@ -8,7 +8,7 @@ import com.adobe.prj.entity.Response;
 import com.adobe.prj.entity.Survey;
 
 public interface ResponseService {
-
+	
 	List<Survey> getSurvey(int i);
 	int addResponse(ResponseDto response);
 	Survey getSurveyById(int id);
@@ -18,5 +18,4 @@ public interface ResponseService {
 	Response getSingleResponse(int qid,int userid);
 	void updateDistributionTable(int sid,int uname);
 	Question getQuesById(int qid);
-	
 }

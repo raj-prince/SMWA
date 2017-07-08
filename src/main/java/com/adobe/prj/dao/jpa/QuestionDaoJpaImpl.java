@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.adobe.prj.dao.QuestionDao;
 import com.adobe.prj.entity.Question;
-import com.adobe.prj.entity.Survey;
 
 @Repository
 public class QuestionDaoJpaImpl implements QuestionDao {
@@ -22,7 +21,6 @@ public class QuestionDaoJpaImpl implements QuestionDao {
 	public int addQuestion(Question question) {
 		em.persist(question);
 		return question.getQuestionId();
-//		return 0;
 	}
 	
 	@Override

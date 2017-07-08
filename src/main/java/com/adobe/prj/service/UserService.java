@@ -9,5 +9,4 @@ public interface UserService {
 	int addUser(User user);
 	User getUser(String username);
 	User getUserById(int uid);
-
 }

@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	
 	@ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public String handleException(HttpServletRequest request, Exception ex){
-		System.out.println("xyz");
 		return "error";
 	}
 }

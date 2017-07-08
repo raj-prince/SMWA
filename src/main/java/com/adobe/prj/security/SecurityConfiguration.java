@@ -13,31 +13,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	
 	@Autowired
 	 DataSource dataSource;
 
 	@Autowired
-	public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
-			throws Exception {
-			auth.inMemoryAuthentication().withUser("d").password("world")
-				.roles("USER", "ADMIN");
+	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("d").password("world").roles("USER", "ADMIN");
 		
 		auth.jdbcAuthentication().dataSource(dataSource)
-		  .usersByUsernameQuery(
-		   "select user_name,password,1 from user where user_name=?")
-		  .authoritiesByUsernameQuery(
-		   "select user_name,user_type from user where user_name=?");
-		 } 
+			.usersByUsernameQuery("select user_name,password,1 from user where user_name=?")
+			.authoritiesByUsernameQuery("select user_name,user_type from user where user_name=?");
+	} 
 	
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http.authorizeRequests().antMatchers("/login").permitAll()
 		.antMatchers("/").access("hasAuthority('0') or hasAuthority('1') or hasAuthority(0) or hasAuthority(1)").and()
 				.formLogin().and().exceptionHandling()
 				.accessDeniedPage("/access-denied");
 	}
-	
 }

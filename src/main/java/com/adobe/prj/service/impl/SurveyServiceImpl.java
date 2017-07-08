@@ -35,27 +35,25 @@ public class SurveyServiceImpl implements SurveyService {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	
 	@Override
 	public List<Question> getQuestions(int id) {
-		
 		return surveyDao.getQuestions(id);
 	}
 
 	@Override
 	public int addSurvey(Survey survey) {
-		// TODO Auto-generated method stub
 		return surveyDao.addSurvey(survey);
 	}
 
 	@Override
 	public int addQuestion(Question question) {
-		// TODO Auto-generated method stub
 		return questionDao.addQuestion(question);
 	}
 
 	@Override
 	public int distributeSurvey(Distribution distribution) {
-		
 		return distributionDao.distributeSurvey(distribution);
 	}
 	
@@ -64,7 +62,7 @@ public class SurveyServiceImpl implements SurveyService {
 		return distributionDao.getDistributedSurveys();
 	}
 	
-	// return list of all survey created by the given user.
+	@Override
 	public List<Survey> getAllSurvey(String createdBy) {
 		return surveyDao.getAllSurvey(createdBy);
 	}
@@ -104,19 +102,18 @@ public class SurveyServiceImpl implements SurveyService {
 		return responseDao.getResponse(questionId);
 	}
 	
+	@Override
 	public Survey getSurveyById(int sid){
 		return surveyDao.getSurveyById(sid);
 	}
 
 	@Override
 	public List<User> getUnsentUsers(Survey s) {
-		return distributionDao.getUnsentUsers(s);
-		
+		return distributionDao.getUnsentUsers(s);	
 	}
 
 	@Override
 	public User getUserByName(String uname) {
 		return userDao.getUserByName(uname);
-//		return null;
 	}
 }

@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="distribution")
-public class Distribution {
+public class Distribution implements Comparable <Distribution> {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="distribution_id")
@@ -36,11 +36,7 @@ public class Distribution {
 	@Temporal(TemporalType.TIMESTAMP) 
 	private Date distributionTimestamp;
 
-	/**
-	 * 
-	 */
-	public Distribution() {
-	}
+	public Distribution() {}
 
 	/**
 	 * @param distributionId
@@ -135,6 +131,66 @@ public class Distribution {
 	public String toString() {
 		return "Distribution [distributionId=" + distributionId + ", surveyId=" + surveyId + ", userId=" + userId
 				+ ", surveyStatus=" + surveyStatus + ", distributionTimestamp=" + distributionTimestamp + "]";
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + distributionId;
+		result = prime * result + ((distributionTimestamp == null) ? 0 : distributionTimestamp.hashCode());
+		result = prime * result + ((surveyId == null) ? 0 : surveyId.hashCode());
+		result = prime * result + ((surveyStatus == null) ? 0 : surveyStatus.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Distribution other = (Distribution) obj;
+		if (distributionId != other.distributionId)
+			return false;
+		if (distributionTimestamp == null) {
+			if (other.distributionTimestamp != null)
+				return false;
+		} else if (!distributionTimestamp.equals(other.distributionTimestamp))
+			return false;
+		if (surveyId == null) {
+			if (other.surveyId != null)
+				return false;
+		} else if (!surveyId.equals(other.surveyId))
+			return false;
+		if (surveyStatus != other.surveyStatus)
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+	
+	/*
+	 * Compare on the basis of distributionId.
+	 */
+	@Override
+	public int compareTo(Distribution o) {
+		if (this.equals(o)) {
+			return 0;
+		}
+		return this.distributionId - o.distributionId;
 	}
 	
 	
