@@ -42,6 +42,8 @@
 	</form:form>
 	
 	<form action="distribute.do">
+	<br><br>
+	Please Save all questions before quiting<br>
     <input type="submit" value="Quit and Distribute" style="margin-left:4px;">
 	</form>
 	<script>
