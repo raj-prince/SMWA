@@ -9,10 +9,7 @@
 <title>welcome Respondent</title>
 </head>
 <body>
-	<h2>title</h2>
-	<div>${msg}</div>
-
-	<h5>Hello  ${userName} </h5>
+	<h2>Hello Responder</h2>
 	<a href="getSurvey.do">Get surveys for you !</a><br />
 	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
 	
