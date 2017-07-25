@@ -70,8 +70,15 @@ public class ResponseController {
 		return "surveyList";
 	}
 	
-	@RequestMapping("getClosedSurvey.do")
+	@RequestMapping("/getClosedSurvey.do")
 	public String fetchClosedSurvey(Model model,Authentication authentication){
+		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+		model.addAttribute("survey",responseService.getClosedSurvey(surveyService.getUserByName(a.getUsername()).getUserId()));
+		return "closedSurveyList";
+	}
+	
+	@RequestMapping("/*/getClosedSurvey.do")
+	public String fetchClosedSurvey2(Model model,Authentication authentication){
 		org.springframework.security.core.userdetails.User a=(org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 		model.addAttribute("survey",responseService.getClosedSurvey(surveyService.getUserByName(a.getUsername()).getUserId()));
 		return "closedSurveyList";
@@ -91,6 +98,7 @@ public class ResponseController {
 			}
 		}
 		responseService.updateDistributionTable(sid,user.getUserId());
+		//windows.alert();
 		return "indexRespondent";
 	}
 	

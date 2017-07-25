@@ -9,16 +9,16 @@
 </head>
 <body>
 	<h3>Surveys</h3>
-	<table border="1" > 
-		<tr>
-			<th>ID</th><th>Title</th><th>Description</th> <th> Show Survey</th>
+	<table border="4" > 
+		<tr style="height:40px; width:450px; margin:0; ">
+			<th>Title</th><th>Description</th> <th> Show Survey</th>
 		</tr>
 		<c:forEach items="${survey}" var="surveys">
-			<tr>
-				<td>${surveys.surveyId}</td>
-				<td>${surveys.surveyTitle}</td>
-				<td>${surveys.surveyDescription}</td>
-				<td><a href="<c:url value='/showSurvey/${surveys.surveyId}'/>"> show </a> </td>
+			<tr style="height:40px; width:450px; margin:0; ">
+				
+				<td style="height:40px; width:300px; margin:0; ">${surveys.surveyTitle}</td>
+				<td style="height:40px; width:300px; margin:0; ">${surveys.surveyDescription}</td>
+				<td style="height:40px; width:300px; margin:0; "><a href="<c:url value='/showSurvey/${surveys.surveyId}'/>"> show </a> </td>
 			</tr>
 		</c:forEach>
 	</table>

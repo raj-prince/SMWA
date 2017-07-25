@@ -9,7 +9,7 @@
 <title>welcome Respondent</title>
 </head>
 <body>
-	<h2>Hello Responder</h2>
+	<h2>Hello Respondent</h2>
 	<a href="getSurvey.do">Get surveys for you !</a><br />
 	<a href="getClosedSurvey.do">Get surveys for which you responded !</a><br />
 	
